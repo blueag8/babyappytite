@@ -11,9 +11,9 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] ="Baby_Recipes"
 app.config['MONGODB_URI'] = os.getenv("MONGO_URI")
 
-@app.route('/Hello')
+@app.route('/')
 def Hello():
-    print('Hello')
+    return('Hello')
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
