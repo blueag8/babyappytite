@@ -1,0 +1,17 @@
+{% extends 'base.html' %}{% block content %}
+<header>
+    <div class= "navbar-fixed">
+        <nav class = "nav-bar">
+            <div class = "container">
+                <div class="nav-wrapper">
+                    <a href= "{{url_for('home')}}" img src="/static/img/apple.png">Baby Appy-tite</a>
+                    <a href="{{url_for('sixmonth_recipes')}}" img src="/static/img/Group_2.png">6m Recipes</a>
+                     <a href="{{url_for('sevenmonth_recipes')}}" img src="/static/img/Group_3.png">7m Recipes</a>
+                      <a href="{{url_for('tenmonth_recipes')}}" img src="/static/img/Group_4.png">10m Recipes</a>
+                       <a href="{{url_for('twelvemonth_recipes')}}" img src="/static/img/Group_5.png">12m Recipes</a>
+                </div>
+            </div>
+        </nav>
+</header>
+{% endfor %}
+{% endblock %}
