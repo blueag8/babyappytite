@@ -1,17 +1,20 @@
+import pymongo
 import os
+
 
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 
-#connect to database
+#connect to databased
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] ="Baby_Recipes"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Baby_Recipes"
 
-
 mongo = PyMongo(app)
+
+
 #home page
 @app.route('/')
 def index():
@@ -21,8 +24,7 @@ def index():
 
 @app.route('/sixmonth_recipes')
 def sixmonth_recipes():
-    recipes=mongo.db.recipes.find_one_or_404({"category_age":"6 months +"})
-    return render_template("sixmonth_recipes.html", recipes=recipes)
+   return render_template("sixmonth_recipes.html", recipes=mongo.db.recipes.find({"category_age":"6 months +"}))
 
 @app.route('/sevenmonth_recipes')
 def sevenmonth_recipes():
