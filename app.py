@@ -16,9 +16,13 @@ mongo = PyMongo(app)
 
 
 #home page
+
+   
+#add recipe 
 @app.route('/')
-def index():
-    return render_template("index.html")
+def addrecipe():
+    return render_template("addrecipe.html")
+    
     
 #get recipes
 
