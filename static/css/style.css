@@ -1,0 +1,25 @@
+
+/*---------Navbar----------*/
+.navbar-brand{
+    padding: 0px;
+}
+.navbar-brand img {
+    height: 50px;
+}
+   
+.body{
+    padding:20px
+
+}
+
+
+/*-------media-queries---------*/
+    
+  
+@media(max-width: 768px) {
+
+
+
+
+
+}
