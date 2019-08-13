@@ -1,17 +1,51 @@
-{% extends 'base.html' %}{% block content %}
-<header>
-    <div class= "navbar-fixed">
-        <nav class = "nav-bar">
-            <div class = "container">
-                <div class="nav-wrapper">
-                    <a href= "{{url_for('home')}}" img src="/static/img/apple.png">Baby Appy-tite</a>
-                    <a href="{{url_for('sixmonth_recipes')}}" img src="/static/img/Group_2.png">6m Recipes</a>
-                     <a href="{{url_for('sevenmonth_recipes')}}" img src="/static/img/Group_3.png">7m Recipes</a>
-                      <a href="{{url_for('tenmonth_recipes')}}" img src="/static/img/Group_4.png">10m Recipes</a>
-                       <a href="{{url_for('twelvemonth_recipes')}}" img src="/static/img/Group_5.png">12m Recipes</a>
-                       <a href="{{url_for('addrecipe')}}">Share a Recipe</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>"Baby Appy-tite | Recipes for 6 months +"</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+</head>
+<body>
+    <section class="main">
+ <div class="container-fluid">
+        <div class="row">
+              <div class="row">
+                <div class="col-md-2 col-md-offset-4">
+                    <a href="{{url_for('sixmonth_recipes')}}"><img src="/static/img/Group_2.png" alt="6 months plus"></a>
+                 </div>
+                <div class="col-md-2 col-md-offset-2">
+                    <a href="{{url_for('sevenmonth_recipes')}}"><img src="/static/img/Group_3.png" alt="7 months plus"></a>
                 </div>
             </div>
-        </nav>
-</header>
-{% endblock %}
+         </div>
+    <div class="img">
+        <div class="row">
+        <div class="col-md-2 col-md-offset-4"><img src="/static/img/babyappytite.png"></div>
+        </div>
+        </div>
+        <div class="row">    
+              <div class="row">
+                <div class="col-md-2 col-md-offset-4">
+                      <a href="{{url_for('tenmonth_recipes')}}"><img src="/static/img/Group_4.png" alt="10 months plus"></a>
+                   </div>
+                <div class="col-md-2 col-md-offset-2">
+                       <a href="{{url_for('twelvemonth_recipes')}}"><img src="/static/img/Group_5.png" alt="12 months plus"></a>
+                   </div>
+            </div>
+         </div>
+         <div class="row">
+               <div class="row">
+                 <div class="col-md-2 col-md-offset-4">
+                <a href="{{url_for('addrecipe')}}"><img src="/static/img/caterpillar.png" alt="Share a recipe"></a>
+             </div>
+        </div>
+        </body>
+</html>

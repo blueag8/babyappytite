@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
 
-#connect to databased
+#connect to database
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] ="Baby_Recipes"
@@ -22,22 +22,16 @@ mongo = PyMongo(app)
 def home():
     return render_template("index.html")
    
-#add recipe 
 
-@app.route('/addrecipe')
-def addrecipe():
-    return render_template("addrecipe.html")
-    
     
 #get recipes
+@app.route('/recipe/<recipe_id>')
+def recipe(recipe_id):
+    return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 
 @app.route('/sixmonth_recipes')
 def sixmonth_recipes():
    return render_template("sixmonth_recipes.html", recipes=mongo.db.recipes.find({"category_age":"6 months +"}))
-
-@app.route('/recipe/<recipe_id>')
-def recipe(recipe_id):
-    return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 
 @app.route('/sevenmonth_recipes')
 def sevenmonth_recipes():
@@ -51,7 +45,12 @@ def tenmonth_recipes():
 def twelvemonth_recipes():
     return render_template("twelvemonth_recipes.html",recipes=mongo.db.recipes.find({"category_age":"12 months +"}))
 
+#add recipe 
 
+@app.route('/addrecipe')
+def addrecipe():
+    return render_template("addrecipe.html")
+    
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

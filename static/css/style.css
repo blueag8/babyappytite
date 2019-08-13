@@ -1,26 +1,31 @@
-
+body {
+    background-color: black;
+}
+img {
+    height: 200px;
+    vertical-align: super;
+}
+.main {
+    padding: 50px;
+    margin: 20px;
+}
 /*---------Navbar----------*/
-.navbar-brand{
-    padding: 0px;
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
 }
 .navbar-brand img {
     height: 50px;
 }
    
-.body{
-    padding:20px
-
-}
-
-span{
-    font-size:16px;
-    font-weight:bold;
+.container-fluid{
+    background-color: blue;
 }
 
 
-/*-------media-queries---------*/
-    
-  
 @media(max-width: 768px) {
 
 
