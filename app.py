@@ -35,6 +35,10 @@ def addrecipe():
 def sixmonth_recipes():
    return render_template("sixmonth_recipes.html", recipes=mongo.db.recipes.find({"category_age":"6 months +"}))
 
+@app.route('/recipe/<recipe_id>')
+def recipe(recipe_id):
+    return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
+
 @app.route('/sevenmonth_recipes')
 def sevenmonth_recipes():
     return render_template("sevenmonth_recipes.html", recipes=mongo.db.recipes.find({"category_age":"7 months +"}))
@@ -46,6 +50,8 @@ def tenmonth_recipes():
 @app.route('/twelvemonth_recipes')
 def twelvemonth_recipes():
     return render_template("twelvemonth_recipes.html",recipes=mongo.db.recipes.find({"category_age":"12 months +"}))
+
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

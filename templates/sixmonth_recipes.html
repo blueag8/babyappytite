@@ -1,60 +1,18 @@
 {% extends 'base.html' %}{% block content %}
 
+{% for recipe in recipes %}
 <div class="card-deck">
   <div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
+    <img class="card-img-top" src="/static/img/apple.png" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h5 class="card-title">{{recipe.recipe_name}}</h5>
+      <p class="card-text">{{recipe.category_age}}</p>
+      <p class="card-text"><small class="text-muted">{{recipe.cooking_time}}</small></p>
+      <p class="card-text"><a href="{{url_for('recipe', recipe_id=recipe._id)}}" img src="">Got to Recipe</a>
+      </p>
     </div>
   </div>
-  <div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-</div>
-<div class="recipes">
    
-  {% for recipe in recipes %}
-     {{recipe.recipe_name}}
-     {{recipe.category_age}}
-     {{recipe.cooking_time}}
-     {{recipe.Portion_sizes}}
-     {{recipe.ingredient_1}}
-     {{recipe.ingredient_2}}
-     {{recipe.ingredient_3}}
-     {{recipe.ingredient_4}}
-     {{recipe.ingredient_5}}
-     {{recipe.ingredient_6}}
-     {{recipe.ingredient_7}}
-     {{recipe.ingredient_8}}
-     {{recipe.ingredient_9}}
-     {{recipe.ingredient_10}}
-     {{recipe.allergen__1}}
-     {{recipe.allergen__2}}
-     {{recipe.allergen_3}}
-     {{recipe.allergen_4}}
-     {{recipe.allergen_5}}
-     {{recipe.allergen_6}}
-     {{recipe.allergen_7}}
-     {{recipe.allergen_8}}
-     {{recipe.description}}
-     {{recipe.method_desc}}
-
-   </div>
    {% endfor %}
 {% endblock %}
 

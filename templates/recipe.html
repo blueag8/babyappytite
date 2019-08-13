@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% block content %}
+
+
+<div class="recipe">
+   
+  {% for recipe in recipes %}
+  
+    <img class="card-img-top" src="/static/img/leek.jpg" alt="recipe image">
+    
+    <div class="card-body">
+      <h5 class="card-title"><a href="{{url_for('recipe', recipe_id=recipe._id)}}">{{recipe.recipe_name}}</a></h5>
+       
+        <p class="card-text">{{recipe.category_age}}</p>
+         
+          <p class="card-text">{{recipe.cooking_time}} Minutes</p>
+         
+          <p class="card-text">Serves {{recipe.portion_sizes}}</p>
+      <p class="card-text">
+                    <strong>Ingredients: </strong>
+                        {% for ingredient in recipe.ingredients %}
+                      
+                         <li>{{ingredient}}</li>
+                        {% endfor %}                                
+  
+    </p>
+     
+    </div>
+    <div>
+       <p class="card-text">{{recipe.description}}</p>
+       </div>
+       <p class="card-text">
+           <strong>Instructions:</strong>
+       {% for step in recipe.steps %}
+       
+                <ul >{{step}}</ul>
+            {% endfor %}
+        </p>
+  </div>
+ </div>
+</div>
+   </div>
+   {% endfor%}
+  
+
+   {% endblock %}

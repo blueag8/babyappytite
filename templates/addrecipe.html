@@ -3,13 +3,13 @@
  
 <div class="form row">
   <div class="form-group">
-    <label for="exampleFormControlInput1">Recipe Name</label>
-    <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="eg. Sweet Potato Mash">
+    <label for="Recipe Name">Recipe Name</label>
+    <input type="name" class="form-control" id="Recipe Name" placeholder="eg. Sweet Potato Mash">
   </div>
   
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Select which age group this is suitable for</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <label for="category_age">Select which age group this is suitable for</label>
+    <select class="form-control" id="category_age">
       <option>6 months +</option>
       <option>7 months +</option>
       <option>10 months +</option>
@@ -19,7 +19,7 @@
   </div>
   
 <div class="form-row">
-    <label for="exampleFormControlSelect1">Please select which allergens are or may be in the recipe</label>
+    <label for="allergens">Please select which allergens are or may be in the recipe</label>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Nut">
   <label class="form-check-label" for="inlineCheckbox1">Nut</label>
@@ -27,47 +27,48 @@
   <label class="form-check-label" for="inlineCheckbox2">Meat</label>
   <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Dairy Free">
   <label class="form-check-label" for="inlineCheckbox3">Dairy</label>
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Gluten Free">
-  <label class="form-check-label" for="inlineCheckbox3">Gluten</label>
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Seafood Free">
-  <label class="form-check-label" for="inlineCheckbox3">Seafood</label>
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Soy">
-  <label class="form-check-label" for="inlineCheckbox3">Soy</label>
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Gluten Free">
+  <label class="form-check-label" for="inlineCheckbox4">Gluten</label>
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Seafood Free">
+  <label class="form-check-label" for="inlineCheckbox5">Seafood</label>
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Soy">
+  <label class="form-check-label" for="inlineCheckbox6">Soy</label>
 </div>
     </div>
   <div class="form-group">
-    <label for="formGroupExampleInput">Cooking Time</label>
+    <label for="cooking_time">Cooking Time</label>
       <input type="number" name="points" min="0" max="100" step="1" value="10">
       <label>(in minutes)</label>
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">Serving Size</label>
+    <label for="Portion_sizes">Serving Size</label>
    <input type="number" name="points" min="0" max="100" step="1" value="4">
   </div>
   <div class="form row">
 <div class= "wrapper">     
 <div class="container1">
-    <button class="add_form_field">Add Ingredients &nbsp; 
-      <span style="font-size:16px; font-weight:bold;">+ </span>
+    <button class="add_ingredients">Add Ingredients &nbsp; 
+      <span>+ </span>
     </button>
-    <div><input type="text" name="mytext[]">
+    <div><input type="text" name="ingredient[]">
 </div>
 </div>
 </div> 
  
   <div class="form-group row">
-    <label for="exampleFormControlTextarea1">Description</label>
+    <label for="recipe_description">Description</label>
     <div class="row">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Description of the recipe or any additional notes you would like to add here"></textarea>
+    <textarea class="form-control" id="description" rows="5" placeholder="Description of the recipe or any additional notes you would like to add here"></textarea>
  </div>   
   <div class="form-group row">
-    <label for="exampleFormControlTextarea1">Cooking instructions</label>
+    <label for="Cooking Instructions">Cooking instructions</label>
     <div class="row">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Method here eg. 1. Wash the vegetables 2. Peel the vegetables etc"></textarea>
+    <textarea class="form-control" id="cooking" placeholder="Method here eg. 1. Wash the vegetables 2. Peel the vegetables etc"></textarea>
  </div>   
   </div>
 
 </form>
  {% endblock %}
+ 
 
 
