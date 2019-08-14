@@ -18,11 +18,10 @@ mongo = PyMongo(app)
 #home page
 
 
+
 @app.route('/')
 def home():
     return render_template("index.html")
-   
-
     
 #get recipes
 @app.route('/recipe/<recipe_id>')
@@ -49,7 +48,13 @@ def twelvemonth_recipes():
 
 @app.route('/addrecipe')
 def addrecipe():
-    return render_template("addrecipe.html")
+    return render_template("addrecipe.html", categories=mongo.db.categories.find())
+    
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    mongo.db.recipes.insert_one(request.form.to_dict())
+    return redirect(url_for('/addrecipe'))
+
     
 
 if __name__ == '__main__':

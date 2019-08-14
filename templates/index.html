@@ -14,38 +14,49 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
 <body>
-    <section class="main">
- <div class="container-fluid">
+<section="main">
+     <div class="container-fluid">
         <div class="row">
-              <div class="row">
-                <div class="col-md-2 col-md-offset-4">
-                    <a href="{{url_for('sixmonth_recipes')}}"><img src="/static/img/Group_2.png" alt="6 months plus"></a>
+              <div class="mainlink img">
+                <div class="col-xs-6 col-sm-offset-2 col-md-1 col-md-offset-2">
+                    <a href="/sixmonth_recipes"><img src="/static/img/Group_2.png" alt="6 months plus"></a>
                  </div>
-                <div class="col-md-2 col-md-offset-2">
-                    <a href="{{url_for('sevenmonth_recipes')}}"><img src="/static/img/Group_3.png" alt="7 months plus"></a>
+                <div class="col-xs-6 col-sm-2 col-md-1 col-md-offset-5">
+                    <a href="/sevenmonth_recipes"><img src="/static/img/Group_3.png" alt="7 months plus"></a>
                 </div>
             </div>
          </div>
-    <div class="img">
+    </div> 
+    <div class="container-fluid">
         <div class="row">
-        <div class="col-md-2 col-md-offset-4"><img src="/static/img/babyappytite.png"></div>
-        </div>
-        </div>
-        <div class="row">    
-              <div class="row">
-                <div class="col-md-2 col-md-offset-4">
-                      <a href="{{url_for('tenmonth_recipes')}}"><img src="/static/img/Group_4.png" alt="10 months plus"></a>
-                   </div>
-                <div class="col-md-2 col-md-offset-2">
-                       <a href="{{url_for('twelvemonth_recipes')}}"><img src="/static/img/Group_5.png" alt="12 months plus"></a>
-                   </div>
-            </div>
-         </div>
-         <div class="row">
-               <div class="row">
-                 <div class="col-md-2 col-md-offset-4">
-                <a href="{{url_for('addrecipe')}}"><img src="/static/img/caterpillar.png" alt="Share a recipe"></a>
+             <div class="apple img">
+                     <div class="col-xs-6 col-sm-offset-4 col-md-12 col-md-offset-4">
+                        <img src="/static/img/babyappytite.png">
+                      </div>
+                  </div>
+              </div>
+          </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="caterpillar img">
+             <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
+                <a href="/addrecipe"><img src="/static/img/caterpillar.png" alt="Share a recipe"></a>
+				</div>
              </div>
         </div>
+     </div>
+    <div class="container-fluid">
+        <div class="row">    
+              <div class="mainlink img">
+                <div class="col-xs-6 col-sm-offset-2 col-md-1 col-md-offset-2">
+                      <a href="/tenmonth_recipes"><img src="/static/img/Group_4.png" alt="10 months plus"></a>
+                   </div>
+                <div class="col-xs-6 col-sm-3 col-md-1 col-md-offset-5">
+                       <a href="/twelvemonth_recipes"><img src="/static/img/Group_5.png" alt="12 months plus"></a>
+                  </div>
+                 </div>
+                </div>
+             </div>
         </body>
+    </section>
 </html>

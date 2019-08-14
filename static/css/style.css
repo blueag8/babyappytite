@@ -1,14 +1,55 @@
 body {
-    background-color: black;
+    margin: 15px;
+    padding: 20px;
 }
+
 img {
-    height: 200px;
+    height: 150px;
     vertical-align: super;
 }
-.main {
-    padding: 50px;
-    margin: 20px;
+.apple img {
+    height: 200px;
 }
+
+.caterpillar img {
+    height: 100px;
+}
+
+.mainlink img
+{
+    height: 125px;
+    }
+
+.navbar img {
+    height: 80px;
+}
+
+.main {
+    margin: 20px;
+    padding: 20px;
+    border: 15px;
+}
+.form-control {
+    color: #0c0c0c;
+    background-color: #fff;
+    background-image: none;
+    border: 2px solid #0b0b0b;
+} 
+label {
+   color: #0c0c0c;
+    font-family: 'Emilys Candy', cursive;
+    /* font-family: Emily; */
+    font-size: 15px;
+}
+
+button{
+    background-color: #4bf524;
+    font-family: 'Emily';
+}
+.delete {
+    color: #db1f1f;
+}
+
 /*---------Navbar----------*/
 .navbar {
     position: relative;
@@ -21,15 +62,11 @@ img {
     height: 50px;
 }
    
-.container-fluid{
-    background-color: blue;
+/*-----Media Queries--------*/
+
+@media (min-width: 767px)
+{
+body {
+    margin: 10px;
 }
-
-
-@media(max-width: 768px) {
-
-
-
-
-
 }

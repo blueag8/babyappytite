@@ -9,24 +9,25 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Emilys+Candy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
- <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                 <a class="navbar-brand" href="{{url_for('home')}}">
-                 <img src="/static/img/babyappytite.png">
+<header>
+         <div class="nav-wrapper">
+              <div class="navbar img">
+                 <a class="icon" href="{{url_for('home')}}">
+                      <img src="/static/img/babyappytite.png">
                 </a>
             </div>
-       </div>
-    </nav>
-    
-
+        </div>
+      </div>
+</header>
 <body>
-    {% block content %}{% endblock %}
+    <div class="container-fluid">
+        {% block content %}{% endblock %}
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
@@ -53,7 +54,45 @@
         $(this).parent('div').remove();
         x--;
     })
+    
 });
+ $(document).ready(function() {
+    var max_fields = 10;
+    var wrapper = $(".container2");
+    var add_button = $(".add_steps");
+
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append('<div><input type="text" name="step[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+    
+});
+
+$(document).ready(function() {
+    var wrapper = $(".container3");
+    var check_box= $(".add_allergens");
+
+ var x = 1;
+    $(check_box).click(function(e) {
+        e.preventDefault();
+            $(wrapper).append('<div><input type="checkbox" name="allergen[]"/><a href="#" class="delete">Delete</a></div>'); 
+    });
+
+});
+
+
     </script>
 </body>
 
