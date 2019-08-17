@@ -17,9 +17,22 @@
           <p class="card-text">Serves {{recipe.portion_sizes}}</p>
       <p class="card-text">
                     <strong>Ingredients: </strong>
+                    
                         {% for ingredient in recipe.ingredients %}
                       
-                         <li>{{ingredient}}</li>
+                         <ol>{{ingredient}}</ol>
+                         
+                        {% endfor %}                            
+    </p>
+    <p class="card-text">Allergens:
+                        {% for allergen in recipe.allergens %}
+                      
+                         <li>{{allergen}}</li>
+                         
+                         {% else %}
+                        
+                         <li><em>No known allergens</em></li>
+                         
                         {% endfor %}                                
   
     </p>
@@ -32,7 +45,7 @@
            <strong>Instructions:</strong>
        {% for step in recipe.steps %}
        
-                <ul >{{step}}</ul>
+                <ol >{{step}}</ol>
             {% endfor %}
         </p>
   </div>

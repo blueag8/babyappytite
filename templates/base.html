@@ -81,16 +81,20 @@
 });
 
 $(document).ready(function() {
-    var wrapper = $(".container3");
-    var check_box= $(".add_allergens");
-
- var x = 1;
-    $(check_box).click(function(e) {
-        e.preventDefault();
-            $(wrapper).append('<div><input type="checkbox" name="allergen[]"/><a href="#" class="delete">Delete</a></div>'); 
-    });
-
-});
+    var check_box= mongo.db.recipes.getlist('allergens');
+    var numberOfCheckedItems = 0;  
+    
+    for(var i = 0; i < checkboxes.length; i++)  
+    
+     {  
+        if(checkboxes[i].checked)  
+            numberOfCheckedItems++;  
+    }  
+        if (numberOfCheckedItems<0)
+        {
+    return false;  
+    }  
+} ); 
 
 
     </script>
