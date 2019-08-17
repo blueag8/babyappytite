@@ -63,8 +63,10 @@ def twelvemonth_recipes():
 
 @app.route('/addrecipe')
 def addrecipe():
-    return render_template("addrecipe.html", recipes=mongo.db.recipes.find(),
+    return render_template("testform.html",recipes=mongo.db.recipes.find(),
            categories=mongo.db.categories.find())
+    #return render_template("addrecipe.html", recipes=mongo.db.recipes.find(),
+           #categories=mongo.db.categories.find())
 
  #took idea for flask from https://github.com/Deirdre18/dumpdinners-recipe-app/blob/master/app.py
  
@@ -78,39 +80,41 @@ def addrecipe():
     #Test1 Failed 
     
     #Testing2 
-@app.route('/insert_recipe', methods=['POST'])
+@app.route('/insert_recipe', methods=['GET','POST'])
 def insert_recipe():
    # if 'image' in request.files:
         #filename = images.save(request.files['image'])
         #filepath = '../static/images/' + filename
+    recipes=mongo.db.recipes
     
-    recipe_name:request.form["recipe_name"]
-    category_age:request.form["category_age"]
-    cooking_time:int(request.form["cooking_time"])
-    portion_sizes:int(request.form["portion_size"]) 
-    allergens:request.form.getlist["allergen"]
-    ingredients:request.form.getlist["ingredient"]
-    recipe_description:request.form["recipe_description"]
-    steps:request.form.getlist["add_step"]
+
+    recipe_name=request.form["recipe_name"]
+    category_age=request.form["category_age"]
+    cooking_time=int(request.form["cooking_time"])
+    portion_sizes=int(request.form["portion_size"]) 
+    allergens=request.form.getlist("allergen")
+    ingredients=request.form.getlist("ingredient")
+    recipe_description=request.form["recipe_description"]
+    steps=request.form.getlist("step")
       
     form={
     
         "recipe_name":recipe_name,
         "category_age":category_age,
         "cooking_time":cooking_time,
-        "portion_sizes":portion_sizes,
+        "portion_size":portion_sizes,
         "allergen": allergens,
         "ingredient": ingredients,
         "recipe_description":recipe_description,
-        "add_step": steps,
+        "step": steps,
            
           }
           
         #"image": filepath
       
-    new_recipe=mongo.db.recipes.insert(form)
-    flash ("Thank you, your recipe has been added!")
-    return redirect(url_for('home',recipe_id = new_recipe.inserted_id))
+    recipes.insert_one(form)
+    #flash ("Thank you, your recipe has been added!")
+    return redirect(url_for('home'))
 
     
 if __name__ == '__main__':

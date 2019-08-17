@@ -1,21 +1,24 @@
-{% extends 'base.html'%}{% block content %}
+{% extends 'base.html'%}{% block content %}{% with messages = get_flashed_messages() %} {% if messages %}
+
  
 <form action="{{ url_for('insert_recipe') }}" name="form" method="POST" class="col s12">
   <div class="form-group">
     <label class="recipe_name">Recipe Name</label>
-    <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash" required>
+    <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash">
   </div>
   
 <div class="form-group">
-    <label for="category_age">Select which age group this is suitable for</label>
-    <select class="form-control" id="category_age" name="category_age" required>
+<div class="input-field">
+<label for="category_age">Select which age group this is suitable for</label>
+    <select class="form-control" id="category_age" name="category_age">
       <option value="" disabled selected>Choose Category</option>
-      <option>6 months +</option>
-      <option>7 months +</option>
-      <option>10 months +</option>
-      <option>12 months +</option>
+      <option value="1">6 months +</option>
+      <option value="2">7 months +</option>
+      <option value="3">10 months +</option>
+      <option value="4">12 months +</option>
     </select>
   </div>
+</div>
 </div>
   
 <div class="form-group row">
@@ -38,12 +41,12 @@
 
   <div class="form-group row">
     <label for="cooking_time">Cooking Time</label>
-      <input type="number" name="cooking_time" min="0" max="100" step="1" value="1" required>
+      <input type="number" name="cooking_time" min="0" max="100" step="1" value="1">
       <label>(in minutes)</label>
   </div>
   <div class="form-group row">
     <label for="portion_sizes">Serving Size</label>
-   <input type="number" name="portion_size" min="0" max="100" step="1" value="1" required>
+   <input type="number" name="portion_size" min="0" max="100" step="1" value="1">
   </div>
   <div class="form row">
 <div class= "wrapper">     
@@ -51,7 +54,7 @@
     <button class="add_ingredients">Add Ingredients &nbsp; 
       <span>+ </span>
     </button>
-    <div><input type="text" name="ingredient" value="ingredient" placeholder="Sweet Potato" required>
+    <div><input type="text" name="ingredient" value="ingredient" placeholder="Sweet Potato">
 </div> 
 </div>
 </div> 
@@ -69,7 +72,7 @@
     <button class="add_steps">Add Steps &nbsp; 
       <span>+ </span>
     </button>
-    <div><input type="text" name="step" value="step" placeholder"eg. wash vegetables" required>
+    <div><input type="text" name="step" value="step" placeholder"eg. wash vegetables">
   </div>
 </div>
 </div> 
