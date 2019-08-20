@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
+
 <header>
          <div class="nav-wrapper">
               <div class="navbar img">
@@ -24,6 +25,16 @@
       </div>
 </header>
 <body>
+<!---------https://flask.palletsprojects.com/en/1.1.x/patterns/flashing/------>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
     <div class="container-fluid">
         {% block content %}{% endblock %}
     </div>
@@ -32,11 +43,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    
+<!--------function for add ingredients----------> <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
     <script type="text/javascript">
-        $(document).ready(function() {
-    var max_fields = 10;
-    var wrapper = $(".container1");
-    var add_button = $(".add_ingredients");
+     $(document).ready(function() {
+         var max_fields = 10;
+        var wrapper = $(".container1");
+          var add_button = $(".add_ingredients");
 
     var x = 1;
     $(add_button).click(function(e) {
@@ -55,7 +68,10 @@
         x--;
     })
     
-});
+        });
+    </script>
+
+ <script type="text/javascript">
  $(document).ready(function() {
     var max_fields = 10;
     var wrapper = $(".container2");
@@ -76,32 +92,42 @@
         e.preventDefault();
         $(this).parent('div').remove();
         x--;
-    })
+    });
     
 });
+ <script type="text/javascript">
+     $(document).ready(function() {
+        var max_fields = 10;
+        var wrapper = $(".container1");
+          var add_button = $(".add_ingredients");
 
-$(document).ready(function() {
-    var check_box= mongo.db.recipes.getlist('allergens');
-    var numberOfCheckedItems = 0;  
+    var x = 1;
+    $(edit_ingredient).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append('<div><input type="text" name="ingredient[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
     
-    for(var i = 0; i < checkboxes.length; i++)  
-    
-     {  
-        if(checkboxes[i].checked)  
-            numberOfCheckedItems++;  
-    }  
-        if (numberOfCheckedItems<0)
-        {
-    return false;  
-    }  
-} ); 
-
-$(document).ready(function() {
-    $('select').material_select();
-  });
-
-
+        });
     </script>
+
+<script type="text/javascript">
+ $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script> 
+
+
 </body>
 
 </html>

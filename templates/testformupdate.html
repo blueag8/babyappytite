@@ -1,0 +1,121 @@
+{% extends 'base.html'%}{% block content %}
+ 
+
+
+  <h3>Edit Recipe</h3>
+    <div class="form row">
+      <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
+       <div class="input-field col s12">
+      <label class="recipe_name">Recipe Name</label>
+      <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
+       </div>
+    </div>
+ 
+
+  <div class="form row">
+      <label for="category_age">Select which age group this is suitable for</label>
+        <select class="category" id="category_age" name="category_age" onclick="getOption()">
+          <option value="{{recipe.category_age}}">{{recipe.category_age}}</option>
+          <option value="1">6 months +</option>
+          <option value="2">7 months +</option>
+          <option value="3">10 months +</option>
+          <option value="4">12 months +</option>
+        </select>
+      </div>
+  </div> 
+  
+<div class="form row">
+     <div class="select multiple">
+       <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
+          <input class="form-check-input" type="checkbox" id="allergen"  name="allergen" value="Nut">
+          <label class="form-check-label" for="allergen">Nut</label>
+          <input class="form-check-input" type="checkbox"  id="allergen" name="allergn" value="Meat">
+          <label class="form-check-label" for="allergen">Meat</label>
+          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Dairy">
+          <label class="form-check-label" for="allergen">Dairy</label>
+          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Gluten">
+          <label class="form-check-label" for="allergen">Gluten</label>
+          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Seafood">
+          <label class="form-check-label" for="allergen">Seafood</label>
+          <input class="form-check-input" type="checkbox"  id="allergen" name="allergen" value="Soy">
+          <label class="form-check-label" for="allergen">Soy</label>
+      </div>
+    </div>
+
+
+  <div class="form row">
+    <label for="cooking_time">Cooking Time</label>
+    
+      <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" required>
+      <label>(in minutes)</label>
+    </div>
+  </div>
+  <div class="form row">
+    <label for="portion_sizes">Serving Size</label>
+    <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}" required>
+    </div>
+  </div>
+  
+  <div class="form row">
+    <div class= "wrapper">     
+       <div class="container1">
+          <div class="input-field col s12">
+            <div><input type="text" name="ingredient" value={% for ingredient in recipe.ingredients %}>
+
+                     <li>{{ingredient}}</li>
+                         
+                      {% endfor %}          
+            </div>
+          </div>
+        </div>
+    </div> 
+  </div>
+ 
+  <div class="form row">
+    <label for="recipe_description">Description</label>
+      <div class="row">
+        <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" value="{{recipe.recipe_description}}">{{recipe.recipe_description}}</textarea>
+         </div>  
+      </div>
+   </div>
+
+  <div class="form row">
+    <label for="add_steps">Cooking instructions</label>
+<!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
+      <div class= "wrapper">     
+        <div class="container2">
+            <button class="add_steps">Add Steps &nbsp; 
+            <span>+ </span>
+            </button>
+              <div><input type="text" name="step" value={% for step in recipe.steps %}>
+                <ol>{{step}}</ol>
+            
+                  {% endfor %}
+              </div>
+            </div>
+        </div>
+      </div>
+ 
+
+<div class="form row">
+  <div class="input-field col s12">
+    <div class="btn">
+       <span>File</span>
+        <input type="file">
+    </div>
+    <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+      <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">
+          <i class="material-icons add_box">Share</i>
+       </button>
+  </div>
+</div>
+</form>
+ {% endblock %}
+ 

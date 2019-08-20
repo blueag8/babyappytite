@@ -62,6 +62,10 @@ button{
     height: 50px;
 }
    
+ /* icon prefix focus color */
+.input-field .prefix.active {
+     color: red;
+   }
 /*-----Media Queries--------*/
 
 @media (min-width: 767px)

@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] ="Baby_Recipes"
 app.config["MONGO_URI"] ="mongodb+srv://blueag8:mongo8@cluster0-iodau.mongodb.net/Baby_Recipes?retryWrites=true&w=majority"
+app.config['SECRET_KEY'] = 'yum'    
 
 mongo = PyMongo(app)
 
@@ -28,7 +29,8 @@ def home():
 
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
-    return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
+    recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)})
+    return render_template("recipe.html", recipes=recipes )
 
 #TEST1
     
@@ -63,12 +65,12 @@ def twelvemonth_recipes():
 
 @app.route('/addrecipe')
 def addrecipe():
-    return render_template("testform.html",recipes=mongo.db.recipes.find(),
+    #return render_template("testform.html",recipes=mongo.db.recipes.find(),
+          # categories=mongo.db.categories.find())
+    return render_template("addrecipe.html", recipes=mongo.db.recipes.find(),
            categories=mongo.db.categories.find())
-    #return render_template("addrecipe.html", recipes=mongo.db.recipes.find(),
-           #categories=mongo.db.categories.find())
 
- #took idea for flask from https://github.com/Deirdre18/dumpdinners-recipe-app/blob/master/app.py
+ #took idea for flash from https://github.com/Deirdre18/dumpdinners-recipe-app/blob/master/app.py
  
 #@app.route('/insert_recipe', methods=['POST'])
 #def insert_recipe():
@@ -82,10 +84,9 @@ def addrecipe():
     #Testing2 
 @app.route('/insert_recipe', methods=['GET','POST'])
 def insert_recipe():
-   # if 'image' in request.files:
-        #filename = images.save(request.files['image'])
-        #filepath = '../static/images/' + filename
     recipes=mongo.db.recipes
+  
+   # filepath = '../static/img/' + filename
     
 
     recipe_name=request.form["recipe_name"]
@@ -96,6 +97,7 @@ def insert_recipe():
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
+    #filename = image.save(request.files['image'])
       
     form={
     
@@ -107,15 +109,59 @@ def insert_recipe():
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-           
+       # "image": filepath,
           }
           
-        #"image": filepath
+     
       
     recipes.insert_one(form)
-    #flash ("Thank you, your recipe has been added!")
+    flash ("Thank you, your recipe has been added!")
     return redirect(url_for('home'))
 
+#edit recipe
+#@app.route('/editrecipe/<recipe_id>', methods=['GET','POST'])
+#def editrecipe(recipe_id):
+   
+    #return render_template("testform.html",recipes=mongo.db.recipes.find(),
+          # categories=mongo.db.categories.find())
+    #return render_template("editrecipe.html",recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}),
+          # categories=mongo.db.categories.find())
+
+#TESTING 
+@app.route('/editrecipe/<recipe_id>')
+def editrecipe(recipe_id):
+    the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    all_categories=mongo.db.category_age.find()
+    return render_template('testformupdate.html', recipe=the_recipe, category_age=all_categories)
+    
+@app.route('/update_recipe', methods=['POST'])
+def update_recipe(recipe_id):
+    recipes=mongo.db.recipes
+    recipes.update( {'_id': ObjectId(recipe_id)},
+   # filepath = '../static/img/' + filename
+    {
+    '$set':{
+            'recipe_name':request.form.get["recipe_name"],
+            'category_age':request.form.get["category_age"],
+            'cooking_time':int(request.form["cooking_time"]),
+            'portion_sizes':int(request.form["portion_size"]),
+            'allergens':request.form.getlist("allergen"),
+            'ingredients':request.form.getlist("ingredient"),
+            'recipe_description':request.form["recipe_description"],
+            'steps':request.form.getlist("step"),
+            }
+   # filename = image.save(request.files['image'])
+      })
+          
+    #flash ("Thank you, your recipe has been added!")
+    return redirect(url_for('home'))
+    
+   # filepath = '../static/img/' + filename
+
+    #filename = image.save(request.files['image']
+    
+    
+    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
