@@ -132,8 +132,8 @@ def insert_recipe():
 def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     all_categories=mongo.db.category_age.find()
-    allergens=mongo.db.allergens.find()
-    return render_template('testformupdate.html', recipe=the_recipe, allergens=allergens, category_age=all_categories)
+    allergen=mongo.db.allergens.find()
+    return render_template('testformupdate.html', recipe=the_recipe, allergen=allergen, category_age=all_categories)
     
 @app.route('/update_recipe', methods=['POST'])
 def update_recipe(recipe_id):
@@ -146,7 +146,7 @@ def update_recipe(recipe_id):
             'category_age':request.form.get["category_age"],
             'cooking_time':int(request.form["cooking_time"]),
             'portion_sizes':int(request.form["portion_size"]),
-            'allergens':request.form.getlist('check'),
+            'allergens':request.form.getlist("allergen"),
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form["recipe_description"],
             'steps':request.form.getlist("step"),
