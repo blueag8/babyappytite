@@ -23,31 +23,35 @@
       </div>
   </div> 
   
- <div class="row">
-   <select Multiple>
-       <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
-         <input class="form-check-input" type="checkbox" id="Nut" name="allergen" value="Nut">
-          <label class="form-check-label" for="Nut">Nut</label>
-          
-          <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
-          <label class="form-check-label" for="Meat">Meat</label>
-          
-          <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
-          <label class="form-check-label" for="Dairy">Dairy</label>
-          
-          <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
-          <label class="form-check-label" for="Gluten">Gluten</label>
-          
-          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Seafood">
-          <label class="form-check-label" for="Seafood">Seafood</label>
-          
-          <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
-          <label class="form-check-label" for="Soy">Soy</label>
-          
-          </select>
-      </div>
-  </div>
+  
+ <div class = "allergens">
+    <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
+      <div class="form-check form-check-inline">
+     {% if allergens.nut %} 
+        <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut" checked>
+        <label class="form-check-label" for="nut">Nut</label>
+         {% else %}
+        <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut">
+        <label class="form-check-label" for="nut">Nut</label>
+        {% endif %}
+    
+        <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
+        <label class="form-check-label" for="Meat">Meat</label>
+
+  
+        <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
+        <label class="form-check-label" for="Dairy">Dairy</label>
+  
+        <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
+        <label class="form-check-label" for="Gluten">Gluten</label>
+    
+        <input class="form-check-input" type="checkbox" id="Seafood" name="allergen" value="Seafood">
+        <label class="form-check-label" for="Seafood">Seafood</label>
    
+        <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
+        <label class="form-check-label" for="Soy">Soy</label>
+    </div>
+</div>
   
 
   <div class="form row">

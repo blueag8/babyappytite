@@ -131,8 +131,9 @@ def insert_recipe():
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    all_categories=mongo.db.category_age.find_one()
-    return render_template('testformupdate.html', recipe=the_recipe, category_age=all_categories)
+    all_categories=mongo.db.category_age.find()
+    allergens=mongo.db.allergens.find()
+    return render_template('testformupdate.html', recipe=the_recipe, allergens=allergens, category_age=all_categories)
     
 @app.route('/update_recipe', methods=['POST'])
 def update_recipe(recipe_id):
