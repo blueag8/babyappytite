@@ -131,7 +131,7 @@ def insert_recipe():
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    all_categories=mongo.db.category_age.find()
+    all_categories=mongo.db.category_age.find_one()
     return render_template('testformupdate.html', recipe=the_recipe, category_age=all_categories)
     
 @app.route('/update_recipe', methods=['POST'])
@@ -140,12 +140,12 @@ def update_recipe(recipe_id):
     recipes.update( {'_id': ObjectId(recipe_id)},
    # filepath = '../static/img/' + filename
     {
-    '$set':{
+    {
             'recipe_name':request.form.get["recipe_name"],
             'category_age':request.form.get["category_age"],
             'cooking_time':int(request.form["cooking_time"]),
             'portion_sizes':int(request.form["portion_size"]),
-            'allergens':request.form.getlist("allergen"),
+            'allergens':request.form.getlist('check'),
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form["recipe_description"],
             'steps':request.form.getlist("step"),
@@ -167,3 +167,4 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+

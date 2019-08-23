@@ -5,12 +5,11 @@
   
 <div class="form row">
 <form action="{{ url_for('insert_recipe') }}" name="form" method="POST" class="col s12">
-   <div class="input-field col s12">
       <label class="recipe_name">Recipe Name</label>
       <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash">
     </div>
 
-<div class="input-field col s12">
+<div class="row">
     <div class="category_age">
       <label for="category_age">Select which age group this is suitable for</label>
         <select class="category" id="category_age" name="category_age" required>
@@ -23,40 +22,46 @@
       </div>
   </div>
 </div>  
+
+  <div class = "allergens">
+     <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="Nut" name="allergen" value="Nut">
+        <label class="form-check-label" for="Nut">Nut</label>
+
+    
+        <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
+        <label class="form-check-label" for="Meat">Meat</label>
+
   
-<div class="input-field col s12">
-    <select multiple>
-    <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
-         <input class="form-check-input" type="checkbox" id="Nut" name="allergen" value="Nut">
-          <label class="form-check-label" for="Nut">Nut</label>
-          <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
-          <label class="form-check-label" for="Meat">Meat</label>
-          <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
-          <label class="form-check-label" for="Dairy">Dairy</label>
-          <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
-          <label class="form-check-label" for="Gluten">Gluten</label>
-          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Seafood">
-          <label class="form-check-label" for="Seafood">Seafood</label>
-          <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
-          <label class="form-check-label" for="Soy">Soy</label>
-          </select>
-      </div>
-  </div>
+        <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
+        <label class="form-check-label" for="Dairy">Dairy</label>
   
-<div class="input-field col s12">
+        <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
+        <label class="form-check-label" for="Gluten">Gluten</label>
+    
+        <input class="form-check-input" type="checkbox" id="Seafood" name="allergen" value="Seafood">
+        <label class="form-check-label" for="Seafood">Seafood</label>
+   
+        <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
+        <label class="form-check-label" for="Soy">Soy</label>
+    </div>
+</div>
+
+<div class="row">
     <label for="cooking_time">Cooking Time</label>
     
       <input type="number" name="cooking_time" min="0" max="100" step="1" value="1" required>
       <label>(in minutes)</label>
   </div>
   
- <div class="input-field col s12">
+ <div class="row">
     <label for="portion_sizes">Serving Size</label>
     <input type="number" name="portion_size" min="0" max="100" step="1" value="1" required>
   </div>
   
   
-<div class="input-field col s12">
+<div class="row">
     <div class= "wrapper">     
        <div class="container1">
         <button class="add_ingredients">Add Ingredients &nbsp; 
@@ -67,14 +72,14 @@
     </div>
   </div> 
  
- <div class="input-field col s12">
+ <div class="recipe_description">
     <label for="recipe_description">Description</label>
       <div class="row">
       <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" placeholder="Description of the recipe or any additional notes you would like to add here"></textarea>
        </div>  
     </div>
 
- <div class="input-field col s12">
+ <div class="steps">
     <label for="add_steps">Cooking instructions</label>
 <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
       <div class= "wrapper">     
@@ -108,4 +113,3 @@
 </form>
 
  {% endblock %}
- 

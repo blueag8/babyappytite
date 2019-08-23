@@ -3,16 +3,15 @@
 
 
   <h3>Edit Recipe</h3>
-    <div class="form row">
+    <div class="row">
       <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
-       <div class="input-field col s12">
       <label class="recipe_name">Recipe Name</label>
       <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
        </div>
     </div>
  
 
-  <div class="form row">
+  <div class="row">
       <label for="category_age">Select which age group this is suitable for</label>
         <select class="category" id="category_age" name="category_age" onclick="getOption()">
           <option value="{{recipe.category_age}}">{{recipe.category_age}}</option>
@@ -24,24 +23,32 @@
       </div>
   </div> 
   
-<div class="form row">
-     <div class="select multiple">
+ <div class="row">
+   <select Multiple>
        <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
-          <input class="form-check-input" type="checkbox" id="allergen"  name="allergen" value="Nut">
-          <label class="form-check-label" for="allergen">Nut</label>
-          <input class="form-check-input" type="checkbox"  id="allergen" name="allergn" value="Meat">
-          <label class="form-check-label" for="allergen">Meat</label>
-          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Dairy">
-          <label class="form-check-label" for="allergen">Dairy</label>
-          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Gluten">
-          <label class="form-check-label" for="allergen">Gluten</label>
+         <input class="form-check-input" type="checkbox" id="Nut" name="allergen" value="Nut">
+          <label class="form-check-label" for="Nut">Nut</label>
+          
+          <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
+          <label class="form-check-label" for="Meat">Meat</label>
+          
+          <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
+          <label class="form-check-label" for="Dairy">Dairy</label>
+          
+          <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
+          <label class="form-check-label" for="Gluten">Gluten</label>
+          
           <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Seafood">
-          <label class="form-check-label" for="allergen">Seafood</label>
-          <input class="form-check-input" type="checkbox"  id="allergen" name="allergen" value="Soy">
-          <label class="form-check-label" for="allergen">Soy</label>
+          <label class="form-check-label" for="Seafood">Seafood</label>
+          
+          <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
+          <label class="form-check-label" for="Soy">Soy</label>
+          
+          </select>
       </div>
-    </div>
-
+  </div>
+   
+  
 
   <div class="form row">
     <label for="cooking_time">Cooking Time</label>
@@ -58,18 +65,19 @@
   
   <div class="form row">
     <div class= "wrapper">     
-       <div class="container1">
-          <div class="input-field col s12">
-            <div><input type="text" name="ingredient" value={% for ingredient in recipe.ingredients %}>
-
-                     <li>{{ingredient}}</li>
-                         
-                      {% endfor %}          
-            </div>
+      <div class="container1">
+        <button class="add_ingredients">Add Ingredients &nbsp; 
+          <span>+ </span>
+         </button>
+          <div><input type="text" name="ingredient" value={% for ingredient in recipe.ingredients %}>
+               <li>{{ingredient}}</li>
+            
+                  {% endfor %}
+           </div>
           </div>
         </div>
-    </div> 
-  </div>
+        </div>
+      </div>
  
   <div class="form row">
     <label for="recipe_description">Description</label>
@@ -118,4 +126,4 @@
 </div>
 </form>
  {% endblock %}
- 
+
