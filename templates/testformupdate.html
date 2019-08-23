@@ -69,21 +69,23 @@
     </div>
   </div>
   
-  <div class="form row">
+         
+  <div class="row">
     <div class= "wrapper">     
-      <div class="container1">
+       <div class="container1">
         <button class="add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
-         </button>
+        </button>
+         {% for ingredient in recipe.ingredients %}
            <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
-             {% for ingredient in recipe.ingredients %}
+            
              {{ingredient}}
-             {% endfor %}
+           
             </textarea>
-              
-           </div>
-          </div> 
-        </div>
+              {% endfor %}
+          </div>
+      </div> 
+    </div>
    
   <div class="form row">
     <label for="recipe_description">Description</label>
@@ -101,14 +103,16 @@
             <button class="add_steps">Add Steps &nbsp; 
             <span>+ </span>
             </button>
-              <div><input type="text" name="step" value={% for step in recipe.steps %}>
-                <ol>{{step}}</ol>
+             {% for step in recipe.steps %}
+           <textarea name="step" class="materialize-textarea" value="{{step}}">
             
-                  {% endfor %}
-              </div>
-            </div>
-        </div>
-      </div>
+             {{step}}
+           
+            </textarea>
+              {% endfor %}
+          </div>
+      </div> 
+    </div>
  
 
 <div class="form row">
