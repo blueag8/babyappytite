@@ -84,24 +84,6 @@
   });
     </script>
     
-  <script type="text/javascript">
-  $(document).ready(function() {
-    $(add_button).click(function(e) {
-        e.preventDefault();
-        if (x < max_fields) {
-            x++;
-            $(wrapper).append('<textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}"><a href="#" class="delete">Delete</a></div>'); //add input box
-        } else {
-            alert('You Reached the limits');
-        }
-    });
-    $(wrapper).on("click", ".delete", function(e) {
-        e.preventDefault();
-        $(this).parent('div').remove();
-        x--;
-    });
- });
-    </script>
     
     
 </body>

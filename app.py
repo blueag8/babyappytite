@@ -133,24 +133,24 @@ def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
     all_categories=mongo.db.category_age.find()
     allergen=mongo.db.allergens.find()
-    return render_template('testformupdate.html', recipe=the_recipe, allergen=allergen, category_age=all_categories)
+    return render_template('editrecipe.html', recipe=the_recipe, allergen=allergen, category_age=all_categories)
     
-@app.route('/update_recipe', methods=['POST'])
+@app.route('/update_recipe/<recipe_id>', methods=['POST'])
 def update_recipe(recipe_id):
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
    # filepath = '../static/img/' + filename
+
     {
-    {
-            'recipe_name':request.form.get["recipe_name"],
-            'category_age':request.form.get["category_age"],
+            'recipe_name':request.form.get("recipe_name"),
+            'category_age':request.form.get("category_age"),
             'cooking_time':int(request.form["cooking_time"]),
             'portion_sizes':int(request.form["portion_size"]),
             'allergens':request.form.getlist("allergen"),
             'ingredients':request.form.getlist("ingredient"),
-            'recipe_description':request.form["recipe_description"],
+            'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-            }
+       
    # filename = image.save(request.files['image'])
       })
           
@@ -161,7 +161,19 @@ def update_recipe(recipe_id):
 
     #filename = image.save(request.files['image']
     
-    
+ 
+@app.route('/update_task/<task_id>', methods=["POST"])
+def update_task(task_id):
+    tasks = mongo.db.tasks
+    tasks.update( {'_id': ObjectId(task_id)},
+    {
+        'task_name':request.form.get('task_name'),
+        'category_name':request.form.get('category_name'),
+        'task_description': request.form.get('task_description'),
+        'due_date': request.form.get('due_date'),
+        'is_urgent':request.form.get('is_urgent')
+    })
+    return redirect(url_for('get_tasks'))   
     
     
 if __name__ == '__main__':
