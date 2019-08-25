@@ -44,16 +44,18 @@
             x++;
             $(wrapper).append('<div><input type="text" name="ingredient[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
         } else {
-            alert('You Reached the limits')
+            alert('You Reached the limits');
         }
     });
     $(wrapper).on("click", ".delete", function(e) {
         e.preventDefault();
         $(this).parent('div').remove();
         x--;
-    })
+    });
+ });
+    </script> 
     
-});
+ <script type="text/javascript">
  $(document).ready(function() {
     var max_fields = 10;
     var wrapper = $(".container2");
@@ -65,7 +67,7 @@
             x++;
             $(wrapper).append('<div><input type="text" name="step[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
         } else {
-            alert('You Reached the limits')
+            alert('You Reached the limits');
         }
     });
     $(wrapper).on("click", ".delete", function(e) {
@@ -73,13 +75,17 @@
         $(this).parent('div').remove();
         x--;
     });
-    
-});
-
-$(document).ready(function() {
+ });
+      </script>
+      
+  <script type="text/javascript">
+    $(document).ready(function() {
     $('select').material_select();
   });
     </script>
+    
+    
+    
 </body>
 
 </html>

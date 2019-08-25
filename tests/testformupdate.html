@@ -23,32 +23,38 @@
       </div>
   </div> 
   
- <div class="row">
-   <select Multiple>
-       <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
-         <input class="form-check-input" type="checkbox" id="Nut" name="allergen" value="Nut">
-          <label class="form-check-label" for="Nut">Nut</label>
-          
-          <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
-          <label class="form-check-label" for="Meat">Meat</label>
-          
-          <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
-          <label class="form-check-label" for="Dairy">Dairy</label>
-          
-          <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
-          <label class="form-check-label" for="Gluten">Gluten</label>
-          
-          <input class="form-check-input" type="checkbox" id="allergen" name="allergen" value="Seafood">
-          <label class="form-check-label" for="Seafood">Seafood</label>
-          
-          <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
-          <label class="form-check-label" for="Soy">Soy</label>
-          
-          </select>
+  <div="container-fluid">
+   <div class = "allergens">
+      <label class="allergens">Please select which allergens are or may be in the recipe</label>
       </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut"{% if 'nut' in recipe.allergens %}checked{% endif %} >
+        <label class="form-check-label" for="nut">Nut</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="meat" name="allergen" value="meat"{% if 'meat' in recipe.allergens %}checked{% endif %}>
+        <label class="form-check-label" for="meat">Meat</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="dairy" name="allergen" value="dairy"{% if 'dairy' in recipe.allergens %}checked{% endif %}>
+        <label class="form-check-label" for="dairy">Dairy</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="seafood" name="allergen " value="seafood"{% if 'seafood' in recipe.allergens %}checked{% endif %}>
+        <label class="form-check-label" for="seafood">Seafood</label>
+      </div> 
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="soy" name="allergen" value="soy">
+        <label class="form-check-label" for="soy">Soy</label>
+      </div>
+    </div>
   </div>
-   
-  
+</div>  
 
   <div class="form row">
     <label for="cooking_time">Cooking Time</label>
@@ -63,22 +69,27 @@
     </div>
   </div>
   
-  <div class="form row">
+         
+  <div class="row">
     <div class= "wrapper">     
-      <div class="container1">
+       <div class="container1">
+        <label for="ingredients">Ingredients</label>
         <button class="add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
-         </button>
-          <div><input type="text" name="ingredient" value={% for ingredient in recipe.ingredients %}>
-               <li>{{ingredient}}</li>
+        </button>
+         {% for ingredient in recipe.ingredients %}
+           <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
             
-                  {% endfor %}
-           </div>
+             {{ingredient}}
+           
+            </textarea>
+            <a href="#" class="delete">Delete</a></div>
+              {% endfor %}
+  
           </div>
-        </div>
-        </div>
-      </div>
- 
+      </div> 
+    </div>
+   
   <div class="form row">
     <label for="recipe_description">Description</label>
       <div class="row">
@@ -92,17 +103,22 @@
 <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
       <div class= "wrapper">     
         <div class="container2">
+           <label for="steps">Steps</label>
             <button class="add_steps">Add Steps &nbsp; 
             <span>+ </span>
             </button>
-              <div><input type="text" name="step" value={% for step in recipe.steps %}>
-                <ol>{{step}}</ol>
             
-                  {% endfor %}
-              </div>
-            </div>
-        </div>
-      </div>
+             {% for step in recipe.steps %}
+           <textarea name="step" class="materialize-textarea" value="{{step}}">
+            
+             {{step}}
+           
+            </textarea>
+            <a href="#" class="delete">Delete</a></div>
+              {% endfor %}
+          </div>
+      </div> 
+    </div>
  
 
 <div class="form row">
@@ -120,7 +136,7 @@
 
   <div class="row">
       <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">
-          <i class="material-icons add_box">Share</i>
+          <i class="material-icons add_box">Update</i>
        </button>
   </div>
 </div>

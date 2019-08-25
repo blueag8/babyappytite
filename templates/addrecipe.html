@@ -1,6 +1,5 @@
 {% extends 'base.html'%}{% block content %}
  
- 
 
   
 <div class="form row">
@@ -12,7 +11,7 @@
 <div class="row">
     <div class="category_age">
       <label for="category_age">Select which age group this is suitable for</label>
-        <select class="category" id="category_age" name="category_age" required>
+        <select class="category" id="category_age" name="category_age">
           <option value=""disabled>choose category</option>
           <option value="1">6 months +</option>
           <option value="2">7 months +</option>
@@ -51,26 +50,29 @@
 <div class="row">
     <label for="cooking_time">Cooking Time</label>
     
-      <input type="number" name="cooking_time" min="0" max="100" step="1" value="1" required>
+      <input type="number" name="cooking_time" min="0" max="100" step="1" value="1">
       <label>(in minutes)</label>
   </div>
   
  <div class="row">
     <label for="portion_sizes">Serving Size</label>
-    <input type="number" name="portion_size" min="0" max="100" step="1" value="1" required>
+    <input type="number" name="portion_size" min="0" max="100" step="1" value="1">
   </div>
   
   
 <div class="row">
-    <div class= "wrapper">     
+    <div class= "wrapper">  
        <div class="container1">
+        <label for="ingredients">Ingredients</label>
         <button class="add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
-        <div><input type="text" name="ingredient" value="ingredient" placeholder="Sweet Potato" required>
+        <div><input type="text" name="ingredient" placeholder="Sweet Potato">
+          <a href="#" class="delete">Delete</a></div>
       </div> 
     </div>
   </div> 
+</div>
  
  <div class="recipe_description">
     <label for="recipe_description">Description</label>
@@ -84,17 +86,20 @@
 <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
       <div class= "wrapper">     
         <div class="container2">
+         <label for="Steps">Steps</label>
           <button class="add_steps">Add Steps &nbsp; 
             <span>+ </span>
           </button>
-            <div><input type="text" name="step" value="step" placeholder"eg. wash vegetables">
+            <div><input type="text" name="step" placeholder="eg. wash vegetables">
+            <a href="#" class="delete">Delete</a></div>
             </div>
         </div>
-      </div>
+     </div>
+ </div>
 
   <div class="file-field input-field">
     <div class="btn">
-       <span>File</span>
+       <span>Upload Picture</span>
         <input type="file">
     </div>
     <div class="file-path-wrapper">
@@ -108,6 +113,31 @@
           <i class="material-icons add_box">Share</i>
        </button>
   </div>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 </div>
 </form>

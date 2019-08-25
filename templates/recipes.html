@@ -3,32 +3,32 @@
 {% for recipe in recipes %}
 <div class="card-deck">
   <div class="card">
-    <img class="card-img-top" src="/static/img/apple.png" alt="Card image cap">
+    <img class="card-img-top" src="/static/img/babyappytite.png" alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title">{{recipe.recipe_name}}</h5>
       <p class="card-text">{{recipe.category_age}}</p>
       <p class="card-text"><small class="text-muted">{{recipe.cooking_time}}</small></p>
-      <p class="card-text"><a href="{{url_for('recipe', recipe_id=recipe._id)}}" img src="">Got to Recipe</a>
-      </p>
+      <p class="card-text"><a href="{{url_for('recipe', recipe_id=recipe._id)}}" img src="">Got to Recipe</a></p>
+      <p class="card-text"><a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><img src="/static/img/edit.png" alt="edit a recipe"></a></p>
     </div>
   </div>
-  <div class="container-fluid">
+  
+   
+   {% endfor %}
+
+<!----image from https://www.seekclipart.com/clipart/ixTJJR_collection-of-free-centipede-drawing-transparent-background-caterpillar/------->
+
+<div class="container-fluid">
         <div class="row">
             <div class="caterpillar img">
              <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
-                <a href="/editrecipe"><img src="/static/img/caterpillar.png" alt="Share a recipe"></a>
+                <a href="{{url_for('addrecipe')}}"><img src="/static/img/caterpillar.png" alt="Share a recipe"></a>
 				</div>
              </div>
         </div>
      </div>
-   
-   {% endfor %}
+
+
 {% endblock %}
-
-
-
-
-
-
 
 

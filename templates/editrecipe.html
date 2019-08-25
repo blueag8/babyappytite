@@ -1,111 +1,163 @@
 {% extends 'base.html'%}{% block content %}
-<div class="form row">
-  
-<form action="{{ url_for('update_recipe') }}" name="form" method="POST" class="col s12">
-    <div class="form row">
+  <h3>Edit Recipe</h3>
+    <div class="row">
+      <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
       <label class="recipe_name">Recipe Name</label>
-      <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash">
-    </div>
-
-
- <div class="input-field col s12">
-   <label for="category_age">Select which age group this is suitable for</label>
-                <select id="category_age" name="category_age">
-                    {% for category in categories %}
-                        <option value="{{category.category_age}}"
-                                {% if category.category_age == recipe.category_age %} selected {% endif %}
-                            {{category.category_age}}</option>
-                    {% endfor %}
-                    
-  <div class="row">
-   <div class="allergens">
-      <div class= "checkbox inline">
-        <div class="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
-         
-         <input class="form-check-input" type="checkbox" id="allergen" value="Nut">
-         <label class="form-check-label" for="Nut">Nut</label>
-         
-         <input class="form-check-input" type="checkbox" id="allergen" value="Meat">
-         <label class="form-check-label" for="Meat">Meat</label>
-        
-         <input class="form-check-input" type="checkbox" id="allergen" value="Dairy">
-         <label class="form-check-label" for="Dairy">Dairy</label>
-         
-         <input class="form-check-input" type="checkbox" id="allergen" value="Gluten">
-         <label class="form-check-label" for="Gluten">Gluten</label>
-         
-         <input class="form-check-input" type="checkbox" id="allergen" value="Seafood">
-         <label class="form-check-label" for="Seafood">Seafood</label>
-         
-         <input class="form-check-input" type="checkbox" id="allergen" value="Soy">
-         <label class="form-check-label" for="Soy">Soy</label>
-        
-         </div>
+      <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
        </div>
-     </div>
     </div>
+ 
+
+  <div class="row">
+      <label for="category_age">Select which age group this is suitable for</label>
+        <select class="category" id="category_age" name="category_age" onclick="getOption()">
+          <option value="{{recipe.category_age}}">{{recipe.category_age}}</option>
+          <option value="1">6 months +</option>
+          <option value="2">7 months +</option>
+          <option value="3">10 months +</option>
+          <option value="4">12 months +</option>
+        </select>
+      </div>
+  </div> 
   
- <div class="input-field col s12">
-    <label for="cooking_time">{{recipe.cooking_time}}</label>
-      <input type="number" name="cooking_time" min="0" max="100" step="1" value="1" required>
+  <div="container-fluid">
+   <div class = "allergens">
+      <label class="allergens">Please select which allergens are or may be in the recipe</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut"{% if 'nut' in recipe.allergens %}checked{% endif %} >
+        <label class="form-check-label" for="nut">Nut</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="meat" name="allergen" value="meat"{% if 'meat' in recipe.allergens %}checked{% endif %}>
+        <label class="form-check-label" for="meat">Meat</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="dairy" name="allergen" value="dairy"{% if 'dairy' in recipe.allergens %}checked{% endif %}>
+        <label class="form-check-label" for="dairy">Dairy</label>
+      </div>
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="seafood" name="allergen " value="seafood"{% if 'seafood' in recipe.allergens %}checked{% endif %}>
+        <label class="form-check-label" for="seafood">Seafood</label>
+      </div> 
+      
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="soy" name="allergen" value="soy">
+        <label class="form-check-label" for="soy">Soy</label>
+      </div>
+    </div>
+  </div>
+</div>  
+
+  <div class="form row">
+    <label for="cooking_time">Cooking Time</label>
+    
+      <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" required>
       <label>(in minutes)</label>
+    </div>
+  </div>
+  <div class="form row">
+    <label for="portion_sizes">Serving Size</label>
+    <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}" required>
+    </div>
   </div>
   
-  <div class="input-field col s12">>
-    <label for="portion_sizes">{{recipe.portion_size}}</label>
-    <input type="number" name="portion_size" min="0" max="100" step="1" value="1" required>
-  </div>
-  
-  
- <div class="input-field col s12">
+         
+  <div class="row">
     <div class= "wrapper">     
        <div class="container1">
+        <label for="ingredients">Ingredients</label>
         <button class="add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
-        <div><input type="text" name="ingredient" value="{{recipe.ingredient}}" placeholder="Sweet Potato" required>
+         {% for ingredient in recipe.ingredients %}
+           <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
+            
+             {{ingredient}}
+           
+            </textarea>
+            <a href="#" class="delete">Delete</a></div>
+              {% endfor %}
+  
+          </div>
       </div> 
     </div>
-  </div> 
- 
- <div class="input-field col s12">
+   
+  <div class="form row">
     <label for="recipe_description">Description</label>
       <div class="row">
-      <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" placeholder="Description of the recipe or any additional notes you would like to add here"></textarea>
-       </div>  
-    </div>
+        <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" value="{{recipe.recipe_description}}">{{recipe.recipe_description}}</textarea>
+         </div>  
+      </div>
+   </div>
 
-<div class="input-field col s12">
+  <div class="form row">
     <label for="add_steps">Cooking instructions</label>
 <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
       <div class= "wrapper">     
         <div class="container2">
-          <button class="add_steps">Add Steps &nbsp; 
+           <label for="steps">Steps</label>
+            <button class="add_steps">Add Steps &nbsp; 
             <span>+ </span>
-          </button>
-            <div><input type="text" name="step" value="step" placeholder"eg. wash vegetables">
-            </div>
-        </div>
-      </div>
+            </button>
+            
+             {% for step in recipe.steps %}
+           <textarea name="step" class="materialize-textarea" value="{{step}}">
+            
+             {{step}}
+           
+            </textarea>
+            <a href="#" class="delete">Delete</a></div>
+              {% endfor %}
+          </div>
+      </div> 
+    </div>
+ 
 
-  <div class="file-field input-field">
+<div class="form row">
+  <div class="input-field col s12">
     <div class="btn">
        <span>File</span>
         <input type="file">
     </div>
     <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
+
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+<img src="/static/img/bin.png" alt="delete a recipe">
+</button>
+
+<!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Delete This Recipe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Are you sure you wish to delete this recipe? Please note that this can not be reversed!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No Changed My Mind</button>
+         <button><a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"></a>Yes Delete</button>
       </div>
     </div>
   </div>
-
-  <div class="row">
-      <button class="btn waves-effect waves-light" type="submit" name="action" value="submit">
-          <i class="material-icons add_box">Share</i>
-       </button>
-  </div>
 </div>
-</div>
-</form>
 
- {% endblock %}
+{% endblock %}
+
