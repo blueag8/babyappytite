@@ -85,11 +85,12 @@ def addrecipe():
 @app.route('/insert_recipe', methods=['GET','POST'])
 def insert_recipe():
     recipes=mongo.db.recipes
+  
    # filepath = '../static/img/' + filename
     
 
     recipe_name=request.form["recipe_name"]
-    category_age=request.form.get["category_age"]
+    category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
     portion_sizes=int(request.form["portion_size"]) 
     allergens=request.form.getlist("allergen")
@@ -114,8 +115,10 @@ def insert_recipe():
      
       
     recipes.insert_one(form)
-    flash ("Thank you, your recipe has been added!")
-    return redirect(url_for('home',recipe=recipe, category_age=category_age))
+    #flash ("Thank you, your recipe has been added!")
+    return redirect(url_for('home'))
+
+
 #edit recipe
 #@app.route('/editrecipe/<recipe_id>', methods=['GET','POST'])
 #def editrecipe(recipe_id):
@@ -129,33 +132,25 @@ def insert_recipe():
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    all_categories=mongo.db.category_age.find()
-    allergen=mongo.db.allergens.find()
-    return render_template('editrecipe.html', recipe=the_recipe, allergen=allergen, category_age=all_categories)
+    all_categories=mongo.db.category_age.find_one()
+    return render_template('editrecipe.html', recipe=the_recipe, category_age=all_categories)
     
 @app.route('/update_recipe/<recipe_id>', methods=['POST'])
 def update_recipe(recipe_id):
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
-
-
-   # filepath = '../static/img/' + filename
-
-
+    #filepath = '../static/img/' + filename,
+   
     {
             'recipe_name':request.form.get("recipe_name"),
             'category_age':request.form.get("category_age"),
             'cooking_time':int(request.form["cooking_time"]),
             'portion_sizes':int(request.form["portion_size"]),
-            'allergens':request.form.getlist("allergen"),
+            'allergens':request.form.getlist('check'),
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-       
-
- 
-   # filename = image.save(request.files['image'])
-
+             #'filename':img.save(request.files['img']),
       })
           
     #flash ("Thank you, your recipe has been added!")
@@ -164,20 +159,15 @@ def update_recipe(recipe_id):
    # filepath = '../static/img/' + filename
 
     #filename = image.save(request.files['image']
-
-
     
-@app.route('/delete_recipe/<recipe_id>')    
+@app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('home'))
-
- 
-
+    
     
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
-

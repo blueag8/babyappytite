@@ -11,12 +11,12 @@
 <div class="row">
     <div class="category_age">
       <label for="category_age">Select which age group this is suitable for</label>
-        <select class="category" id="category_age" name="category_age">
+        <select class="category_age" id="category_age" name="category_age" onclick="getOption()"required>
           <option value=""disabled>choose category</option>
-          <option value="1">6 months +</option>
-          <option value="2">7 months +</option>
-          <option value="3">10 months +</option>
-          <option value="4">12 months +</option>
+          <option value="6 months +">6 months +</option>
+          <option value="7 months +">7 months +</option>
+          <option value="10 months +">10 months +</option>
+          <option value="12 months +">12 months +</option>
         </select>
       </div>
   </div>
@@ -25,25 +25,25 @@
   <div class = "allergens">
      <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="Nut" name="allergen" value="Nut">
-        <label class="form-check-label" for="Nut">Nut</label>
+        <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut">
+        <label class="form-check-label" for="nut">Nut</label>
 
     
-        <input class="form-check-input" type="checkbox" id="Meat" name="allergn" value="Meat">
-        <label class="form-check-label" for="Meat">Meat</label>
+        <input class="form-check-input" type="checkbox" id="meat" name="allergn" value="meat">
+        <label class="form-check-label" for="meat">Meat</label>
 
   
-        <input class="form-check-input" type="checkbox" id="Dairy" name="allergen" value="Dairy">
-        <label class="form-check-label" for="Dairy">Dairy</label>
+        <input class="form-check-input" type="checkbox" id="dairy" name="allergen" value="dairy">
+        <label class="form-check-label" for="dairy">Dairy</label>
   
-        <input class="form-check-input" type="checkbox" id="Gluten" name="allergen" value="Gluten">
-        <label class="form-check-label" for="Gluten">Gluten</label>
+        <input class="form-check-input" type="checkbox" id="gluten" name="allergen" value="gluten">
+        <label class="form-check-label" for="gluten">Gluten</label>
     
-        <input class="form-check-input" type="checkbox" id="Seafood" name="allergen" value="Seafood">
-        <label class="form-check-label" for="Seafood">Seafood</label>
+        <input class="form-check-input" type="checkbox" id="seafood" name="allergen" value="seafood">
+        <label class="form-check-label" for="seafood">Seafood</label>
    
-        <input class="form-check-input" type="checkbox" id="Soy" name="allergen" value="Soy">
-        <label class="form-check-label" for="Soy">Soy</label>
+        <input class="form-check-input" type="checkbox" id="soy" name="allergen" value="soy">
+        <label class="form-check-label" for="soy">Soy</label>
     </div>
 </div>
 
@@ -99,7 +99,7 @@
 
   <div class="file-field input-field">
     <div class="btn">
-       <span>Upload Picture</span>
+       <span>File</span>
         <input type="file">
     </div>
     <div class="file-path-wrapper">
@@ -113,31 +113,6 @@
           <i class="material-icons add_box">Share</i>
        </button>
   </div>
-  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 </div>
 </div>
 </form>
