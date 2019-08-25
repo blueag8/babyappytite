@@ -138,6 +138,10 @@ def editrecipe(recipe_id):
 def update_recipe(recipe_id):
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
+<<<<<<< HEAD
+=======
+   # filepath = '../static/img/' + filename
+>>>>>>> 2e080b1a2b8e13de6aa2297e49487688dc3e0e48
 
     {
             'recipe_name':request.form.get("recipe_name"),
@@ -149,7 +153,11 @@ def update_recipe(recipe_id):
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
        
+<<<<<<< HEAD
     #filename = image.save(request.files['image'])
+=======
+   # filename = image.save(request.files['image'])
+>>>>>>> 2e080b1a2b8e13de6aa2297e49487688dc3e0e48
       })
           
     #flash ("Thank you, your recipe has been added!")
@@ -159,11 +167,27 @@ def update_recipe(recipe_id):
 
     #filename = image.save(request.files['image']
     
+<<<<<<< HEAD
     
 @app.route('/delete_recipe/<recipe_id>')    
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('home'))
+=======
+ 
+@app.route('/update_task/<task_id>', methods=["POST"])
+def update_task(task_id):
+    tasks = mongo.db.tasks
+    tasks.update( {'_id': ObjectId(task_id)},
+    {
+        'task_name':request.form.get('task_name'),
+        'category_name':request.form.get('category_name'),
+        'task_description': request.form.get('task_description'),
+        'due_date': request.form.get('due_date'),
+        'is_urgent':request.form.get('is_urgent')
+    })
+    return redirect(url_for('get_tasks'))   
+>>>>>>> 2e080b1a2b8e13de6aa2297e49487688dc3e0e48
     
     
 if __name__ == '__main__':
