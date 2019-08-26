@@ -7,9 +7,9 @@
     <div class="card-body">
       <h5 class="card-title">{{recipe.recipe_name}}</h5>
       <p class="card-text">{{recipe.category_age}}</p>
-      <p class="card-text"><small class="text-muted">{{recipe.cooking_time}}</small></p>
+      <p class="card-text"><small class="text-muted">{{recipe.cooking_time}} Minutes</small></p>
       <p class="card-text"><a href="{{url_for('recipe', recipe_id=recipe._id)}}" img src="">Got to Recipe</a></p>
-      <p class="card-text"><a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><img src="/static/img/edit.png" alt="edit a recipe"></a></p>
+      <p class="card-text"><a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><image class="edit"img src="/static/img/edit.png" alt="edit a recipe"></a></p>
     </div>
   </div>
   

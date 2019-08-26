@@ -164,7 +164,19 @@ def update_recipe(recipe_id):
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('home'))
-    
+
+# routing for likes
+#referred to another student's code for likes.
+
+@app.route('/likes/<recipe_id>')
+def likes(recipe_id):
+   
+    mongo.db.recipes.find_one_and_update(
+        {'_id': ObjectId(recipe_id)},
+        { '$inc': { 'likes': 1}}
+    )
+    recipe_likes = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    return redirect(url_for('home')) 
     
     
 if __name__ == '__main__':

@@ -9,12 +9,14 @@
     
     <div class="card-body">
       <h5 class="card-title"><a href="{{url_for('recipe', recipe_id=recipe._id)}}">{{recipe.recipe_name}}</a></h5>
+      
+      <img class="card-img star" src="/static/img/star.png">
        
         <p class="card-text">{{recipe.category_age}}</p>
          
           <p class="card-text">{{recipe.cooking_time}} Minutes</p>
          
-          <p class="card-text">Serves {{recipe.portion_sizes}}</p>
+          <p class="card-text">Serves {{recipe.portion_size}}</p>
       <p class="card-text">
                     <strong>Ingredients: </strong>
                     
@@ -58,7 +60,7 @@
         <div class="row">
           <div class="caterpillar img">
              <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
-                <a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><img src="/static/image/edit.png" alt="edit a recipe"></a>
+                <a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><img src="/static/img/edit.png" alt="edit a recipe"></a>
 			    </div>
             </div>
         </div>
