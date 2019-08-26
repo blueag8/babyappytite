@@ -30,6 +30,7 @@ def home():
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
     recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)})
+    
     return render_template("recipe.html", recipes=recipes )
 
 #TEST1
@@ -70,8 +71,6 @@ def addrecipe():
     return render_template("addrecipe.html", recipes=mongo.db.recipes.find(),
            categories=mongo.db.categories.find())
 
- #took idea for flash from https://github.com/Deirdre18/dumpdinners-recipe-app/blob/master/app.py
- 
 #@app.route('/insert_recipe', methods=['POST'])
 #def insert_recipe():
    # recipes=mongo.db.recipes
@@ -85,9 +84,6 @@ def addrecipe():
 @app.route('/insert_recipe', methods=['GET','POST'])
 def insert_recipe():
     recipes=mongo.db.recipes
-  
-   # filepath = '../static/img/' + filename
-    
 
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
@@ -97,8 +93,14 @@ def insert_recipe():
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
-    #filename = image.save(request.files['image'])
-      
+    
+    if 'image' in request.files:
+        image = request.files["image"]
+        filename = image.save(request.files['image'])
+        filepath = 'static/image/uploads/' + filename
+    else: 
+        filepath = 'static/image/babyappytite.png/'
+        
     form={
     
         "recipe_name":recipe_name,
@@ -109,13 +111,12 @@ def insert_recipe():
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-       # "image": filepath,
+        
           }
           
      
-      
     recipes.insert_one(form)
-    #flash ("Thank you, your recipe has been added!")
+    
     return redirect(url_for('home'))
 
 
@@ -139,7 +140,9 @@ def editrecipe(recipe_id):
 def update_recipe(recipe_id):
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
-    #filepath = '../static/img/' + filename,
+
+    
+   
    
     {
             'recipe_name':request.form.get("recipe_name"),
@@ -150,7 +153,7 @@ def update_recipe(recipe_id):
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-             #'filename':img.save(request.files['img']),
+            'filename':image.save(request.files['image']),
       })
           
     #flash ("Thank you, your recipe has been added!")
@@ -168,15 +171,14 @@ def delete_recipe(recipe_id):
 # routing for likes
 #referred to another student's code for likes.
 
-@app.route('/likes/<recipe_id>')
-def likes(recipe_id):
-   
+@app.route('/stars/<recipe_id>',methods=["GET", "POST"])
+def stars(recipe_id):
     mongo.db.recipes.find_one_and_update(
         {'_id': ObjectId(recipe_id)},
-        { '$inc': { 'likes': 1}}
+        { '$inc': { 'stars': 1}}
     )
-    recipe_likes = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    return redirect(url_for('home')) 
+    
+    return render_template("recipe.html") 
     
     
 if __name__ == '__main__':

@@ -118,19 +118,17 @@
       </div> 
     </div>
  
-
-<div class="form row">
-  <div class="input-field col s12">
-    <div class="btn">
-       <span>File</span>
-        <input type="file">
-    </div>
-    <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-
-    </div>
+<!-------bootstrap---------->
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Upload</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="image">
+    <label class="custom-file-label" for="image">Choose file</label>
   </div>
 </div>
+
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -163,6 +161,17 @@
           <div class="delete img">
              <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
            <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"><img src="/static/image/bin.png" alt="delete a recipe"></a>
+             </div>
+          </div>
+        </div>
+       </div>
+
+<!------cancel--------->     
+   <div class="container-fluid">
+        <div class="row">
+          <div class="img">
+             <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
+           <button><a href=""><img src="" alt="cancel">Cancel</a></button>
              </div>
           </div>
         </div>
