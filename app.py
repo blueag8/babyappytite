@@ -46,6 +46,13 @@ def recipe(recipe_id):
         
    # return render_template("recipes.html")
     
+@app.route('/recipes')
+def all_recipes():
+   return render_template("recipes.html", recipes=mongo.db.recipes.find())
+   
+   
+#sort recipes by age group 
+
 @app.route('/sixmonth_recipes')
 def sixmonth_recipes():
    return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"6 months +"}))
@@ -171,14 +178,15 @@ def delete_recipe(recipe_id):
 
 @app.route('/stars/<recipe_id>',methods=["GET", "POST"])
 def stars(recipe_id):
+    
     mongo.db.recipes.find_one_and_update(
         {'_id': ObjectId(recipe_id)},
         { '$inc': { 'stars': 1}}
     )
     
-    return render_template("recipe.html") 
+    return redirect(url_for('recipe',recipe_id=recipe_id))
     
-    
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

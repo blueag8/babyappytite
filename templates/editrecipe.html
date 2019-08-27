@@ -1,19 +1,24 @@
 {% extends 'base.html'%}{% block content %}
 
-<h3>Edit Recipe</h3>
-
-<div class="form">
-  <div class="row">
-    <div class="recipe_name">
-      <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
-      <label class="recipe_name">Recipe Name</label>
-      <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
-    </div>
-   </div>
+<!------cancel--------->     
+     <div class="cancel">
+  <button onclick="goBack()">Cancel</button>
+     </div> 
+     
+    <h3>Edit Recipe</h3>
+    
+ <div class="form">
+     <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
+      <div class="row">
+        <div class="recipe_name">
+        <label class="recipe_name">Recipe Name</label>
+        <input type="materialize-textarea" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
+       </div>
+     </div>
     
     <div class="row">
       <div class="category_age">
-       <label for="category_age">Select which age group this is suitable for</label>
+         <label for="category_age">Select which age group this is suitable for</label>
           <select class="category_age" id="category_age" name="category_age" onclick="getOption()">
           <option value=""disabled>choose category</option>
            {% for category_age in all_ages %}
@@ -76,7 +81,7 @@
   <div class="row">
     <div class= "wrapper">     
       <div class="container1">
-        <button class="btn">Add Ingredients &nbsp; 
+        <button class="btn add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
       </div>
@@ -103,11 +108,14 @@
     </div>
   </div>
 
+
+    
+<!---referred to ----https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
+
   <div class="row">
-<!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
      <div class= "wrapper">     
         <div class="container2">
-            <button class="btn">Add Steps &nbsp; 
+            <button class="btn add_steps">Add Steps &nbsp; 
             <span>+ </span>
             </button>
              </div> 
@@ -136,27 +144,6 @@
   </div>
 
 <footer>
- <div class="container-fluid">
-  <div class="row">
-
-<!------cancel--------->     
-   <div class="col-xs-4 col-sm-4 col-md-4">
-     <div class="cancel">
-      <button class=btn><a href="">Cancel</a></button>
-     </div>
-    </div>
-    
-<!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
-
-<!-------bootstrap---------->
-  <div class="col-xs-4 col-sm-4 col-md-4"> 
-     <div class="delete img">
-       <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"><img src="/static/image/bin.png" alt="delete a recipe"></a>
-     </div>
-    </div>
-
-
-
  <div class="row">
    <div class="col-xs-4 col-sm-4 col-md-4"> 
    
@@ -189,13 +176,23 @@
      </div>
     </div>
 
- </div>
- </div>
- </div>
-</div>
-</footer>
- </form>
 
+
+ <div class="container-fluid">
+  <div class="row">
+    
+<!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
+
+<!-------bootstrap---------->
+  <div class="col-xs-12 col-sm-4 col-md-6"> 
+     <div class="delete img">
+       <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"><img src="/static/image/bin.png" alt="delete a recipe"></a>
+     </div>
+    </div>
+
+</footer>
+</form>
+ </div>
  {% endblock %}
  
 
