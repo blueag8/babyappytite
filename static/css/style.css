@@ -1,3 +1,40 @@
+/*---------Navbar----------*/
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
+}
+.navbar-brand img {
+    height: 50px;
+}
+   
+ /* icon prefix focus color */
+.input-field .prefix.active {
+     color: red;
+   }
+   
+.btn {
+    background-color: #55a626;
+    margin: 20px;
+}
+
+body{
+    padding:25px;
+}
+
+p.recipe {
+    float: right;
+    background: mediumseagreen;
+    padding: 15px;
+    margin-right: 20px;
+}
+
+footer {
+    margin-top: 30px;
+}
+
 img {
     height: 170px;
 }
@@ -9,8 +46,21 @@ img .edit {
     height: 250px;
 }
 
+
 .caterpillar img {
     height: 128px;
+}
+
+.card {
+    margin: 20px;
+    padding: 20px;
+    position: relative;
+    background-color: #beefaf;
+    -webkit-transition: -webkit-box-shadow .25s;
+    transition: -webkit-box-shadow .25s;
+    transition: box-shadow .25s;
+    transition: box-shadow .25s, -webkit-box-shadow .25s;
+    border-radius: 2px;
 }
 card-body {
     font-size: large;
@@ -21,13 +71,16 @@ card-body {
     font-style: inherit;
 }
 
+p.recipe {
+    float: right;
+}
+
+a {
+    color: inherit;
+}
 
 .navbar img {
     height: 80px;
-}
-
-.row {
-    margin-bottom: 0px;
 }
 
 .form-control {
@@ -51,32 +104,20 @@ button{
     color: #db1f1f;
 }
 
-/*---------Navbar----------*/
-.navbar {
-    position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: none;
-    background-color: transparent;
-}
-.navbar-brand img {
-    height: 50px;
-}
-   
- /* icon prefix focus color */
-.input-field .prefix.active {
-     color: red;
-   }
+
 /*-----Media Queries--------*/
 
 @media (min-width: 375px)
 {
-body {
-    margin: 10px;
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 0;
 }
-img {
-    height: 100px;
+.row {
+   
+    margin-bottom: 0px; 
 }
+
 .age img {
     height: 170px;
 }

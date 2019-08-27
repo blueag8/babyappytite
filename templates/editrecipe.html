@@ -1,30 +1,36 @@
 {% extends 'base.html'%}{% block content %}
-  <h3>Edit Recipe</h3>
-    <div class="row">
+
+<h3>Edit Recipe</h3>
+
+<div class="form">
+  <div class="row">
+    <div class="recipe_name">
       <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
       <label class="recipe_name">Recipe Name</label>
       <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
-       </div>
     </div>
- 
-
-  <div class="row">
-      <label for="category_age">Select which age group this is suitable for</label>
-        <select class="category" id="category_age" name="category_age" onclick="getOption()">
-          <option value="{{recipe.category_age}}">{{recipe.category_age}}</option>
+   </div>
+    
+    <div class="row">
+      <div class="category_age">
+       <label for="category_age">Select which age group this is suitable for</label>
+          <select class="category_age" id="category_age" name="category_age" onclick="getOption()">
           <option value=""disabled>choose category</option>
-          <option value="6 months +">6 months +</option>
-          <option value="7 months +">7 months +</option>
-          <option value="10 months +">10 months +</option>
-          <option value="12 months +">12 months +</option>
-        </select>
+           {% for category_age in all_ages %}
+              {% if all_ages.category_age == recipe.category_age %}
+              <option value="{{category_age.category_age}}}">{{category_age.category_age}}</option>
+              {% else %}
+              <option value="{{category_age.category_age}}">{{category_age.category_age}}</option>
+              {% endif %}
+           {% endfor %}
+         </select>
+        </div>
       </div>
-  </div> 
-  
-  <div="container-fluid">
-   <div class = "allergens">
+    </div> 
+   
+  <div class="row">
+    <div class = "allergens">
       <label class="allergens">Please select which allergens are or may be in the recipe</label>
-      </div>
       
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut"{% if 'nut' in recipe.allergens %}checked{% endif %} >
@@ -51,130 +57,146 @@
         <label class="form-check-label" for="soy">Soy</label>
       </div>
     </div>
-  </div>
-</div>  
 
-  <div class="form row">
+    
+  <div class="row">
     <label for="cooking_time">Cooking Time</label>
     
       <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" required>
       <label>(in minutes)</label>
     </div>
   </div>
-  <div class="form row">
+  
+  <div class="row">
     <label for="portion_sizes">Serving Size</label>
     <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}" required>
     </div>
   </div>
   
-         
   <div class="row">
     <div class= "wrapper">     
-       <div class="container1">
-        <label for="ingredients">Ingredients</label>
-        <button class="add_ingredients">Add Ingredients &nbsp; 
+      <div class="container1">
+        <button class="btn">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
-         {% for ingredient in recipe.ingredients %}
-           <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
+      </div>
+     <label for="ingredients">Ingredients</label>
+        
+        {% for ingredient in recipe.ingredients %}
+        <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
             
              {{ingredient}}
            
-            </textarea>
-            <a href="#" class="delete">Delete</a></div>
+        </textarea>
+        <a href="#" class="delete">Delete</a></div>
               {% endfor %}
   
-          </div>
-      </div> 
-    </div>
+      </div>
+    </div> 
+  </div>
    
-  <div class="form row">
+  <div class="row">
     <label for="recipe_description">Description</label>
       <div class="row">
         <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" value="{{recipe.recipe_description}}">{{recipe.recipe_description}}</textarea>
-         </div>  
-      </div>
-   </div>
+      </div>  
+    </div>
+  </div>
 
-  <div class="form row">
-    <label for="add_steps">Cooking instructions</label>
+  <div class="row">
 <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
-      <div class= "wrapper">     
+     <div class= "wrapper">     
         <div class="container2">
-           <label for="steps">Steps</label>
-            <button class="add_steps">Add Steps &nbsp; 
+            <button class="btn">Add Steps &nbsp; 
             <span>+ </span>
             </button>
-            
+             </div> 
+           <label for="add_steps">Cooking instructions</label>
+        
              {% for step in recipe.steps %}
-           <textarea name="step" class="materialize-textarea" value="{{step}}">
+            <textarea name="step" class="materialize-textarea" value="{{step}}">
             
              {{step}}
            
             </textarea>
             <a href="#" class="delete">Delete</a></div>
               {% endfor %}
-          </div>
+        </div>
       </div> 
     </div>
- 
-<!-------bootstrap---------->
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text">Upload</span>
   </div>
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" id="image">
-    <label class="custom-file-label" for="image">Choose file</label>
-  </div>
-</div>
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
- Update Recipe
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Update Recipe?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you would like to update this?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No changed my mind</button>
-        <button type="submit" class="btn btn-primary" name="action" value="submit">Yes, Please Save changes</button>
-      </div>
+  
+   <div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <div class="custom-file">
+      <input type="file" class="custom-file" id="image">
+      <label class="custom-file" for="image">Select image...</label>
+     </div>
     </div>
   </div>
-</div>
-<!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
-       <div class="container-fluid">
-        <div class="row">
-          <div class="delete img">
-             <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
-           <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"><img src="/static/image/bin.png" alt="delete a recipe"></a>
-             </div>
-          </div>
-        </div>
-       </div>
+
+<footer>
+ <div class="container-fluid">
+  <div class="row">
 
 <!------cancel--------->     
-   <div class="container-fluid">
-        <div class="row">
-          <div class="img">
-             <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
-           <button><a href=""><img src="" alt="cancel">Cancel</a></button>
-             </div>
-          </div>
+   <div class="col-xs-4 col-sm-4 col-md-4">
+     <div class="cancel">
+      <button class=btn><a href="">Cancel</a></button>
+     </div>
+    </div>
+    
+<!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
+
+<!-------bootstrap---------->
+  <div class="col-xs-4 col-sm-4 col-md-4"> 
+     <div class="delete img">
+       <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"><img src="/static/image/bin.png" alt="delete a recipe"></a>
+     </div>
+    </div>
+
+
+
+ <div class="row">
+   <div class="col-xs-4 col-sm-4 col-md-4"> 
+   
+<!-------bootstrap---------->
+<!-- Button trigger modal -->
+     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+     Update Recipe
+    </button>
+   </div>
+  </div>
+ </div>
+<!-- Modal -->
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Update Recipe?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-       </div>
-{% endblock %}
+        <div class="modal-body">
+        Are you sure you would like to update this?
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No changed my mind</button>
+        <button type="submit" class="btn btn-primary" name="action" value="submit">Yes, Please Save changes</button>
+        </div>
+      </div>
+     </div>
+    </div>
+
+ </div>
+ </div>
+ </div>
+</div>
+</footer>
+ </form>
+
+ {% endblock %}
+ 
+
 

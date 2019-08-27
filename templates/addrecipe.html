@@ -12,12 +12,10 @@
     <div class="category_age">
       <label for="category_age">Select which age group this is suitable for</label>
         <select class="category_age" id="category_age" name="category_age" onclick="getOption()"required>
-        {% for category 
           <option value=""disabled>choose category</option>
-          <option value="{{category_age}}">6 months +</option>
-          <option value="7 months +">7 months +</option>
-          <option value="10 months +">10 months +</option>
-          <option value="12 months +">12 months +</option>
+               {% for category_age in all_ages %}
+          <option value="{{category_age.category_age}}">{{category_age.category_age}}</option>
+               {% endfor %}
         </select>
       </div>
   </div>

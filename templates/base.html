@@ -42,7 +42,7 @@
         e.preventDefault();
         if (x < max_fields) {
             x++;
-            $(wrapper).append('<div><input type="text" name="ingredient[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper).append('<div><ol><input type="text" name="ingredient[]"/></ol><a href="#" class="delete">Delete</a></div>'); //add input box
         } else {
             alert('You Reached the limits');
         }
@@ -65,7 +65,7 @@
         e.preventDefault();
         if (x < max_fields) {
             x++;
-            $(wrapper).append('<div><input type="text" name="step[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper).append('<div><ol><input type="text" name="step[]"/></ol><a href="#" class="delete">Delete</a></div>'); //add input box
         } else {
             alert('You Reached the limits');
         }

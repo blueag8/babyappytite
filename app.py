@@ -22,7 +22,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def home():
-    return render_template("index.html", recipes=mongo.db.recipes.find())
+    return render_template("index.html", recipes=mongo.db.recipes.find(), all_ages=mongo.db.category_age.find())
     
 #get 
 #single recipe
@@ -30,8 +30,8 @@ def home():
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
     recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)})
-    
-    return render_template("recipe.html", recipes=recipes )
+    category_age=mongo.db.category_age.find()
+    return render_template("recipe.html", recipes=recipes, category_age=category_age)
 
 #TEST1
     
@@ -60,7 +60,7 @@ def tenmonth_recipes():
     
 @app.route('/twelvemonth_recipes')
 def twelvemonth_recipes():
-    return render_template("recipes.html",recipes=mongo.db.recipes.find({"category_age":"12 months +"}))
+    return render_template("recipes.html",recipes=mongo.db.recipes.find())
 
 #add recipe 
 
@@ -68,8 +68,7 @@ def twelvemonth_recipes():
 def addrecipe():
     #return render_template("testform.html",recipes=mongo.db.recipes.find(),
           # categories=mongo.db.categories.find())
-    return render_template("addrecipe.html", recipes=mongo.db.recipes.find(),
-           categories=mongo.db.categories.find())
+    return render_template("addrecipe.html", all_ages=mongo.db.category_age.find())
 
 #@app.route('/insert_recipe', methods=['POST'])
 #def insert_recipe():
@@ -81,9 +80,10 @@ def addrecipe():
     #Test1 Failed 
     
     #Testing2 
-@app.route('/insert_recipe', methods=['GET','POST'])
+@app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipes=mongo.db.recipes
+    all_ages=mongo.db.category_age
 
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
@@ -117,7 +117,7 @@ def insert_recipe():
      
     recipes.insert_one(form)
     
-    return redirect(url_for('home'))
+    return redirect(url_for('home', recipe=recipe, category_age=category_age))
 
 
 #edit recipe
@@ -133,16 +133,14 @@ def insert_recipe():
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    all_categories=mongo.db.category_age.find_one()
-    return render_template('editrecipe.html', recipe=the_recipe, category_age=all_categories)
+    all_ages=mongo.db.category_age.find()
+    return render_template('editrecipe.html', recipe=the_recipe, category_age=all_ages)
     
 @app.route('/update_recipe/<recipe_id>', methods=['POST'])
 def update_recipe(recipe_id):
     recipes=mongo.db.recipes
+    all_ages=mongo.db.category_age
     recipes.update( {'_id': ObjectId(recipe_id)},
-
-    
-   
    
     {
             'recipe_name':request.form.get("recipe_name"),
