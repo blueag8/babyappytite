@@ -12,6 +12,7 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] ="Baby_Recipes"
 app.config["MONGO_URI"] ="mongodb+srv://blueag8:mongo8@cluster0-iodau.mongodb.net/Baby_Recipes?retryWrites=true&w=majority"
 app.config['SECRET_KEY'] = 'yum'    
+app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
 
 mongo = PyMongo(app)
 
@@ -90,8 +91,7 @@ def addrecipe():
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipes=mongo.db.recipes
-    all_ages=mongo.db.category_age
-
+    
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
@@ -101,13 +101,14 @@ def insert_recipe():
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
     
-    if 'image' in request.files:
-        image = request.files["image"]
-        filename = image.save(request.files['image'])
-        filepath = 'static/image/uploads/' + filename
-    else: 
-        filepath = 'static/image/babyappytite.png/'
-        
+    if request.method == "POST":
+
+        if request.files:
+
+            image = request.files["image"]
+
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image))
+  
     form={
     
         "recipe_name":recipe_name,
@@ -140,13 +141,11 @@ def insert_recipe():
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
     the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    all_ages=mongo.db.category_age.find()
-    return render_template('editrecipe.html', recipe=the_recipe, category_age=all_ages)
+    return render_template('editrecipe.html', recipe=the_recipe, all_ages=mongo.db.category_age.find())
     
 @app.route('/update_recipe/<recipe_id>', methods=['POST'])
 def update_recipe(recipe_id):
     recipes=mongo.db.recipes
-    all_ages=mongo.db.category_age
     recipes.update( {'_id': ObjectId(recipe_id)},
    
     {
@@ -158,15 +157,13 @@ def update_recipe(recipe_id):
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-            'filename':image.save(request.files['image']),
+           # 'filename':image.save(request.files['image']),
       })
+         
           
     #flash ("Thank you, your recipe has been added!")
     return redirect(url_for('home'))
     
-   # filepath = '../static/img/' + filename
-
-    #filename = image.save(request.files['image']
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
@@ -185,7 +182,20 @@ def stars(recipe_id):
     )
     
     return redirect(url_for('recipe',recipe_id=recipe_id))
-    
+ 
+@app.route("/upload-image", methods=["GET", "POST"])
+def upload_image():
+
+    if request.method == "POST":
+
+        if request.files:
+
+            image = request.files["image"]
+
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+
+
+            return redirect(request.url)   
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
