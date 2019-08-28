@@ -1,14 +1,21 @@
 {% extends 'base.html'%}{% block content %}
  
-
+ <div class="row">
+    <div class="cancel">
+     <button onclick="goBack()">Cancel</button>
+     </div> 
+  </div>
+    
+  <h3>Add Recipe</h3>
   
 <div class="form row">
 <form action="{{ url_for('insert_recipe')}}" name="form" method="POST" class="col s12">
-      <label class="recipe_name">Recipe Name</label>
+  <div class="row">
+    <label class="recipe_name">Recipe Name</label>
       <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash">
-
-<!------removed row to include category age in input= text and class= form-control which allowed the value to be sent-------->
-
+     </div>
+ 
+      <div class="row">
       <label for="category_age">Select which age group this is suitable for</label>
     
         <select id="category_age" name="category_age"required>
@@ -19,33 +26,42 @@
                {% endfor %}
         </select>
       </div>
-  </div>
-</div>  
-
+ 
+ <div class="row">
   <div class = "allergens">
      <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
+     
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut">
         <label class="form-check-label" for="nut">Nut</label>
-
+      </div>
     
+     <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="meat" name="allergn" value="meat">
         <label class="form-check-label" for="meat">Meat</label>
-
+     </div>
   
+     <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="dairy" name="allergen" value="dairy">
         <label class="form-check-label" for="dairy">Dairy</label>
-  
-        <input class="form-check-input" type="checkbox" id="gluten" name="allergen" value="gluten">
-        <label class="form-check-label" for="gluten">Gluten</label>
+     </div>
     
+     <div class="form-check form-check-inline">
+       <input class="form-check-input" type="checkbox" id="gluten" name="allergen" value="gluten">
+        <label class="form-check-label" for="gluten">Gluten</label>
+     </div>
+     
+     <div class="form-check form-check-inline"> 
         <input class="form-check-input" type="checkbox" id="seafood" name="allergen" value="seafood">
         <label class="form-check-label" for="seafood">Seafood</label>
-   
+      </div>
+      
+     <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="soy" name="allergen" value="soy">
         <label class="form-check-label" for="soy">Soy</label>
-    </div>
-</div>
+     </div>
+   </div>
+ </div>
 
 <div class="row">
     <label for="cooking_time">Cooking Time</label>
@@ -98,9 +114,12 @@
  </div>
  
 
+ <div class="container-fluid">
+   <div class="col-xs-4 col-sm-4 col-md-4"> 
+   
 <!--------https://pythonise.com/feed/flask/flask-uploading-files---------------->
 
-  <div class="input-group mb-3">
+   <div class="input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text">Upload</span>
   </div>

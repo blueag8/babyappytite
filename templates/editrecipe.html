@@ -1,24 +1,26 @@
 {% extends 'base.html'%}{% block content %}
 
 <!------cancel--------->     
-     <div class="cancel">
-  <button onclick="goBack()">Cancel</button>
+  <div class="row">
+    <div class="cancel">
+     <button onclick="goBack()">Cancel</button>
      </div> 
-     
- <h3>Edit Recipe</h3>
+  </div>
+    
+  <h3>Edit Recipe</h3>
   
- <div class="form row">
-   <div class="container-fluid">
+  <div class="form group ">   
     <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" enctype="multipart/form-data" class="col s12">
-      <label class="recipe_name">Recipe Name</label>
-      <input type="materialize-textarea" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
-     
+      <div class="row">
+       <label class="recipe_name">Recipe Name</label>
+       <input type="materialize-textarea" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
+      </div>
 
 <!------removed row to include category age in input= text and class= form-control which allowed the value to be sent-------->
-
-       <label for="category_age">Select which age group this is suitable for</label>
-       <select id="category_age" name="category_age"required>
-       <option value=""disabled>choose category</option>
+      <div class="row">
+        <label for="category_age">Select which age group this is suitable for</label>
+        <select id="category_age" name="category_age"required>
+        <option value=""disabled>choose category</option>
              
  
 <!------referred to Code-Institute-Solutions/TaskManager/blob/master/04-EditingATask/05-update_the_task_in_the_database/templates/edittask.html---->
@@ -26,7 +28,7 @@
               {% for cat in categories %}
                
       {% if cat.category_age == recipe.category_age %}
-        <option value="{{cat.category_age}}" selected>{{cat.category_age}}</option>
+         <option value="{{cat.category_age}}" selected>{{cat.category_age}}</option>
             {% else %}
             
         <option value="{{cat.category_age}}">{{cat.category_age}}</option>
@@ -34,13 +36,9 @@
             {% endfor %}
             
         </select>
-     </div>
-
-
-   
-  <div class="row">
-   <div class="container-fluid">
-    <div class = "allergens">
+    </div>
+    <div class="row">
+      <div class = "allergens">
       <label class="allergens">Please select which allergens are or may be in the recipe</label>
       
       <div class="form-check form-check-inline">
@@ -70,103 +68,85 @@
     </div>
    </div>
 
-    
-  <div class="row">
-    <div class="container-fluid">
+  
+    <div class="row">
       <label for="cooking_time">Cooking Time</label>
     
       <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" >
       <label>(in minutes)</label>
     </div>
-  </div>
-  
-<div class="row">
-   <div class="container-fluid">
+
+
+   <div class="row">
     <label for="portion_size">Serving Size</label>
     <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}">
-    </div>
-  </div>
-  
-  <div class="row">
-   <div class="container-fluid">
-    <div class= "wrapper">     
-      <div class="container1">
-         <label for="ingredients">Ingredients</label>
-        <button class="btn add_ingredients">Add Ingredients &nbsp; 
+   </div>
+ 
+   
+   <div class="row">
+    <div class= "wrapper">  
+       <div class="container1">
+        <label for="ingredients">Ingredients</label>
+        <button class="add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
-      </div>
-    
         
-        {% for ingredient in recipe.ingredients %}
-        <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
-            
-             {{ingredient}}
-           
-        </textarea>
-        <a href="#" class="delete">Delete</a></div>
-              {% endfor %}
-       </div>
-     </div>
-    </div> 
-  </div>
-   
- <div class="row">
-   <div class="container-fluid">
-    <label for="recipe_description">Description</label>
-      <div class="row">
-        <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" value="{{recipe.recipe_description}}">{{recipe.recipe_description}}</textarea>
-      </div>  
+         {% for ingredient in recipe.ingredients %}
+        <div><input type="text" name="ingredient" value="{{ingredient}}">
+          <a href="#" class="delete">Delete</a></div>
+          {% endfor %}
+      </div> 
     </div>
-  </div>
-
+   </div> 
+ </div>
+   
+    <div class="recipe_description">
+     <label for="recipe_description">Description</label>
+       <div class="row">
+         <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" value="{{recipe.recipe_description}}">{{recipe.recipe_description}}</textarea>
+        </div>
+      </div>
 
     
 <!---referred to ----https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
 
-  <div class="row">
-    <div class="container-fluid">
-     <div class= "wrapper">     
+
+ 
+ <div class="steps">
+    <label for="add_steps">Cooking instructions</label>
+<!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
+      <div class= "wrapper">     
         <div class="container2">
-          <label for="add_steps">Cooking instructions</label>
-            <button class="btn add_steps">Add Steps &nbsp; 
+         <label for="Steps">Steps</label>
+          <button class="add_steps">Add Steps &nbsp; 
             <span>+ </span>
-            </button>
-             </div> 
-       
-        
-             {% for step in recipe.steps %}
-            <textarea name="step" class="materialize-textarea" value="{{step}}">
-            
-             {{step}}
-           
-            </textarea>
+          </button>
+          
+                {% for step in recipe.steps %}
+            <div><input type="text" name="step"value="{{step}}">
             <a href="#" class="delete">Delete</a></div>
-              {% endfor %}
+            {% endfor %}
+            </div>
         </div>
-      </div> 
-    </div>
-  </div>
-  
-  
- <div class="row">
-  <div class="container-fluid">
-   <div class="col-xs-4 col-sm-4 col-md-4"> 
+     </div>
+ </div>
+ 
+<div class="container-fluid">
+   <div class="col-xs-4 col-sm-4 col-md-12"> 
     <div class="input-group mb-3">
      <div class="input-group-prepend">
       <div class="custom-file">
-      <input type="file" class="custom-file" id="image">
-      <label class="custom-file" for="image">Select image...</label>
+       <input type="file" class="custom-file" id="image">
+       <label class="custom-file" for="image">Select image...</label>
       </div>
      </div>
     </div>
   </div>
- </div>
 
-<footer>
- <div class="row">
+
   <div class="container-fluid">
-   <div class="col-xs-4 col-sm-4 col-md-4"> 
+   <div class="row">
+     <div class="col-xs-4 col-sm-4 col-md-6"> 
    
 <!-------bootstrap---------->
 <!-- Button trigger modal -->
@@ -175,7 +155,7 @@
     </button>
    </div>
   </div>
- </div>
+</div>
  
 <!-- Modal -->
    <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -205,13 +185,14 @@
 
 <!-------bootstrap---------->
 
- <div class="row">
-  <div class="container-fluid">
-   <div class="col-xs-4 col-sm-4 col-md-4">  
-     <button type="button" class="img icon" data-toggle="modal" data-target="#delete">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-6"> 
+      <button type="button" class="img icon" data-toggle="modal" data-target="#delete">
          <img src="/static/image/bin.png" alt="delete a recipe">
        </button>
-    </div>
+     </div>
+   </div>
   </div>
  </div>
 <!-- Modal -->
@@ -234,7 +215,6 @@
         </div>
       </div>
      </div>
- </footer>
 </form>
 
 

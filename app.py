@@ -9,10 +9,12 @@ from flask_pymongo import PyMongo
 #connect to database
 app = Flask(__name__)
 
-app.config['MONGO_DBNAME'] ="Baby_Recipes"
-app.config["MONGO_URI"] ="mongodb+srv://blueag8:mongo8@cluster0-iodau.mongodb.net/Baby_Recipes?retryWrites=true&w=majority"
-app.config['SECRET_KEY'] = 'yum'    
-app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
+
+#set app variables
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+
+#app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
 
 mongo = PyMongo(app)
 
