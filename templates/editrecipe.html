@@ -8,7 +8,7 @@
     <h3>Edit Recipe</h3>
     
  <div class="form">
-     <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" class="col s12">
+     <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" enctype="multipart/form-data" class="col s12">
       <div class="row">
         <div class="recipe_name">
         <label class="recipe_name">Recipe Name</label>
@@ -18,12 +18,15 @@
     
     
 <div class="row">
-    <div class="category_age">
       <label for="category_age">Select which age group this is suitable for</label>
-        <select class="category_age" id="category_age" name="category_age" onclick="getOption()"required>
+        <select class="select" id="category_age" name="category_age"required>
           <option value=""disabled>choose category</option>
-               {% for category_age in all_ages %}
-          <option value="{{category_age.category_age}}">{{category_age.category_age}}</option>
+               {% for cat in categories %}
+               {% if cat.category_age == recipe.category_age %}
+          <option value="{{cat.category_age}}"select>{{cat.category_age}}</option>
+             {% else %}
+             <option value="{{cat.category_age}}">{{cat.category_age}}</option>
+             {% endif %}
                {% endfor %}
         </select>
       </div>
@@ -65,14 +68,14 @@
   <div class="row">
     <label for="cooking_time">Cooking Time</label>
     
-      <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" required>
+      <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" >
       <label>(in minutes)</label>
     </div>
   </div>
   
   <div class="row">
-    <label for="portion_sizes">Serving Size</label>
-    <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}" required>
+    <label for="portion_size">Serving Size</label>
+    <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}">
     </div>
   </div>
   

@@ -23,7 +23,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def home():
-    return render_template("index.html", recipes=mongo.db.recipes.find(), all_ages=mongo.db.category_age.find())
+    return render_template("index.html", recipes=mongo.db.recipes.find(), categories=mongo.db.categories.find())
     
 #get 
 #single recipe
@@ -31,8 +31,8 @@ def home():
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
     recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)})
-    category_age=mongo.db.category_age.find()
-    return render_template("recipe.html", recipes=recipes, category_age=category_age)
+    categories=mongo.db.categories.find()
+    return render_template("recipe.html", recipes=recipes, categories=categories)
 
 #TEST1
     
@@ -46,10 +46,6 @@ def recipe(recipe_id):
       #  print(recipe)
         
    # return render_template("recipes.html")
-    
-@app.route('/recipes')
-def all_recipes():
-   return render_template("recipes.html", recipes=mongo.db.recipes.find())
    
    
 #sort recipes by age group 
@@ -68,15 +64,14 @@ def tenmonth_recipes():
     
 @app.route('/twelvemonth_recipes')
 def twelvemonth_recipes():
-    return render_template("recipes.html",recipes=mongo.db.recipes.find())
+    return render_template("recipes.html",recipes=mongo.db.recipes.find({"category_age":"12 months +"}))
 
 #add recipe 
 
 @app.route('/addrecipe')
 def addrecipe():
-    #return render_template("testform.html",recipes=mongo.db.recipes.find(),
-          # categories=mongo.db.categories.find())
-    return render_template("addrecipe.html", all_ages=mongo.db.category_age.find())
+    
+    return render_template("addrecipe.html", categories=mongo.db.categories.find())
 
 #@app.route('/insert_recipe', methods=['POST'])
 #def insert_recipe():
@@ -87,6 +82,7 @@ def addrecipe():
     #return render_template("addrecipe.html", recipe=recipe)
     #Test1 Failed 
     
+    #Testing2 
     #Testing2 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
@@ -125,7 +121,7 @@ def insert_recipe():
      
     recipes.insert_one(form)
     
-    return redirect(url_for('home', recipe=recipe, category_age=category_age))
+    return redirect(url_for('home'))
 
 
 #edit recipe
@@ -140,24 +136,31 @@ def insert_recipe():
 #TESTING 
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
-    the_recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
-    return render_template('editrecipe.html', recipe=the_recipe, all_ages=mongo.db.category_age.find())
+    recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    categories=mongo.db.categories.find()
+    return render_template('editrecipe.html', recipe=recipe, categories=categories)
     
 @app.route('/update_recipe/<recipe_id>', methods=['POST'])
 def update_recipe(recipe_id):
-    recipes=mongo.db.recipes
-    recipes.update( {'_id': ObjectId(recipe_id)},
-   
+
+     
+    if request.method == "POST":
+       if request.files:
+                     
+
+          recipes=mongo.db.recipes
+          recipes.update( {'_id': ObjectId(recipe_id)},
+  
     {
             'recipe_name':request.form.get("recipe_name"),
             'category_age':request.form.get("category_age"),
             'cooking_time':int(request.form["cooking_time"]),
-            'portion_sizes':int(request.form["portion_size"]),
+            'portion_size':int(request.form["portion_size"]),
             'allergens':request.form.getlist('check'),
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-           # 'filename':image.save(request.files['image']),
+            'image':request.files["image"]
       })
          
           
@@ -183,19 +186,19 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe',recipe_id=recipe_id))
  
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
+#@app.route("/upload-image", methods=["GET", "POST"])
+#def upload_image():
 
-    if request.method == "POST":
+   # if request.method == "POST":
 
-        if request.files:
+       # if request.files:
 
-            image = request.files["image"]
+           # image = request.files["image"]
 
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+           # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
 
 
-            return redirect(request.url)   
+           # return redirect(request.url)   
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

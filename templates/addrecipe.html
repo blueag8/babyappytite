@@ -3,18 +3,18 @@
 
   
 <div class="form row">
-<form action="{{ url_for('insert_recipe') }}" name="form" method="POST" class="col s12">
+<form action="{{ url_for('insert_recipe')}}" name="form" method="POST" class="col s12">
       <label class="recipe_name">Recipe Name</label>
       <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash">
     </div>
 
 <div class="row">
-    <div class="category_age">
       <label for="category_age">Select which age group this is suitable for</label>
-        <select class="category_age" id="category_age" name="category_age" onclick="getOption()"required>
+        <select class="select" id="category" name="category_age"required>
           <option value=""disabled>choose category</option>
-               {% for category_age in all_ages %}
-          <option value="{{category_age.category_age}}">{{category_age.category_age}}</option>
+          
+               {% for cat in categories %}
+          <option value="{{cat.category_age}}">{{cat.category_age}}</option>
                {% endfor %}
         </select>
       </div>
@@ -101,7 +101,7 @@
     <span class="input-group-text">Upload</span>
   </div>
   <div class="custom-file">
-    <input type="file" class="custom-file-input" id="image" name="image">
+    <input type="file" enctype="multipart/form-data" class="custom-file-input" id="image" name="image">
     <label class="custom-file-label" for="image">Choose file</label>
   </div>
 </div>
