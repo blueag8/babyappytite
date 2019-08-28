@@ -91,7 +91,7 @@ def insert_recipe():
 
 
     recipe_name=request.form["recipe_name"]
-    category_age=request.form["category_age"]
+    category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
     portion_size=int(request.form["portion_size"]) 
     allergens=request.form.getlist("allergen")
