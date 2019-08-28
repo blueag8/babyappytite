@@ -6,31 +6,40 @@
      </div> 
      
  <h3>Edit Recipe</h3>
-  <div class="form row">
+  
+ <div class="form row">
+   <div class="container-fluid">
     <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" enctype="multipart/form-data" class="col s12">
       <label class="recipe_name">Recipe Name</label>
       <input type="materialize-textarea" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
+     
 
 <!------removed row to include category age in input= text and class= form-control which allowed the value to be sent-------->
 
-    <label for="category_age">Select which age group this is suitable for</label>
-        <select id="category_age" name="category_age"required>
-          <option value=""disabled>choose category</option>
+       <label for="category_age">Select which age group this is suitable for</label>
+       <select id="category_age" name="category_age"required>
+       <option value=""disabled>choose category</option>
              
+ 
+<!------referred to Code-Institute-Solutions/TaskManager/blob/master/04-EditingATask/05-update_the_task_in_the_database/templates/edittask.html---->
+ 
               {% for cat in categories %}
-                {% if cat.category_age == recipe.category_age %}
-         <option value="{{cat.category_age}}" selected>{{cat.category_age}}</option>
+               
+      {% if cat.category_age == recipe.category_age %}
+        <option value="{{cat.category_age}}" selected>{{cat.category_age}}</option>
             {% else %}
-            <option value="{{cat.category_age}}">{{cat.category_age}}</option>
+            
+        <option value="{{cat.category_age}}">{{cat.category_age}}</option>
             {% endif %}
             {% endfor %}
+            
         </select>
-      </div>
-   </div>
- </div>  
+     </div>
+
 
    
   <div class="row">
+   <div class="container-fluid">
     <div class = "allergens">
       <label class="allergens">Please select which allergens are or may be in the recipe</label>
       
@@ -59,30 +68,35 @@
         <label class="form-check-label" for="soy">Soy</label>
       </div>
     </div>
+   </div>
 
     
   <div class="row">
-    <label for="cooking_time">Cooking Time</label>
+    <div class="container-fluid">
+      <label for="cooking_time">Cooking Time</label>
     
       <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" >
       <label>(in minutes)</label>
     </div>
   </div>
   
-  <div class="row">
+<div class="row">
+   <div class="container-fluid">
     <label for="portion_size">Serving Size</label>
     <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}">
     </div>
   </div>
   
   <div class="row">
+   <div class="container-fluid">
     <div class= "wrapper">     
       <div class="container1">
+         <label for="ingredients">Ingredients</label>
         <button class="btn add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
       </div>
-     <label for="ingredients">Ingredients</label>
+    
         
         {% for ingredient in recipe.ingredients %}
         <textarea name="ingredient" class="materialize-textarea" value="{{ingredient}}">
@@ -92,12 +106,13 @@
         </textarea>
         <a href="#" class="delete">Delete</a></div>
               {% endfor %}
-  
-      </div>
+       </div>
+     </div>
     </div> 
   </div>
    
-  <div class="row">
+ <div class="row">
+   <div class="container-fluid">
     <label for="recipe_description">Description</label>
       <div class="row">
         <textarea class="form-control" id="recipe_description" name="recipe_description" rows="5" value="{{recipe.recipe_description}}">{{recipe.recipe_description}}</textarea>
@@ -110,13 +125,15 @@
 <!---referred to ----https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
 
   <div class="row">
+    <div class="container-fluid">
      <div class= "wrapper">     
         <div class="container2">
+          <label for="add_steps">Cooking instructions</label>
             <button class="btn add_steps">Add Steps &nbsp; 
             <span>+ </span>
             </button>
              </div> 
-           <label for="add_steps">Cooking instructions</label>
+       
         
              {% for step in recipe.steps %}
             <textarea name="step" class="materialize-textarea" value="{{step}}">
@@ -131,29 +148,37 @@
     </div>
   </div>
   
-   <div class="input-group mb-3">
-    <div class="input-group-prepend">
-    <div class="custom-file">
+  
+ <div class="row">
+  <div class="container-fluid">
+   <div class="col-xs-4 col-sm-4 col-md-4"> 
+    <div class="input-group mb-3">
+     <div class="input-group-prepend">
+      <div class="custom-file">
       <input type="file" class="custom-file" id="image">
       <label class="custom-file" for="image">Select image...</label>
+      </div>
      </div>
     </div>
   </div>
+ </div>
 
 <footer>
  <div class="row">
+  <div class="container-fluid">
    <div class="col-xs-4 col-sm-4 col-md-4"> 
    
 <!-------bootstrap---------->
 <!-- Button trigger modal -->
-     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update">
      Update Recipe
     </button>
    </div>
   </div>
  </div>
+ 
 <!-- Modal -->
-   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
         <div class="modal-header">
@@ -175,24 +200,22 @@
 
 
 
- <div class="container-fluid">
-  <div class="row">
     
 <!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
 
 <!-------bootstrap---------->
-<!-- Button trigger modal -->
-  <div class="col-xs-12 col-sm-4 col-md-6"> 
-     <button type="button" class="img icon" data-toggle="modal" data-target="#exampleModalCenter2">
+
+ <div class="row">
+  <div class="container-fluid">
+   <div class="col-xs-4 col-sm-4 col-md-4">  
+     <button type="button" class="img icon" data-toggle="modal" data-target="#delete">
          <img src="/static/image/bin.png" alt="delete a recipe">
        </button>
-     </div>
-   </div>
-   </div>
+    </div>
   </div>
  </div>
 <!-- Modal -->
-   <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal fade" id="delete_recipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
         <div class="modal-header">
@@ -211,9 +234,11 @@
         </div>
       </div>
      </div>
-</footer>
+ </footer>
 </form>
- </div>
+
+
+
  {% endblock %}
  
 

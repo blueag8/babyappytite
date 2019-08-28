@@ -179,20 +179,50 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe',recipe_id=recipe_id))
  
-#@app.route("/upload-image", methods=["GET", "POST"])
+@app.route("/upload-image", methods=["GET", "POST"])
 #def upload_image():
 
-   # if request.method == "POST":
+  #  if request.method == "POST":
 
-       # if request.files:
+      #  if request.files:
 
-           # image = request.files["image"]
+          #  image = request.files["image"]
 
-           # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+          # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
 
 
-           # return redirect(request.url)   
+          # return redirect(request.url)   
 
+
+
+@app.route('/recipes', methods=['GET', 'POST'])
+def recipes():
+   
+    if request.method == 'POST':
+      
+       category_age=request.form.get("category_age")
+       category_age=mongo.db.categories.find()
+       
+    if recipe.category_age == "6 months +":
+       return redirect(url_for('sixmonth_recipes'))
+       
+    if category_age == "7 months +":
+       return redirect(url_for('sevenmonth_recipes'))
+             
+    if  category_age == "10 months +":
+        return redirect(url_for('tenmonth_recipes'))
+             
+    if category_age == "12 months +":
+       return redirect(url_for('twelvemonth_recipes'))
+    
+    else: 
+        return redirect(url_for('home'))
+            
+            
+       
+    return render_template("recipes.html") 
+    
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),

@@ -96,6 +96,9 @@
         </div>
      </div>
  </div>
+ 
+
+<!--------https://pythonise.com/feed/flask/flask-uploading-files---------------->
 
   <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -109,35 +112,20 @@
 
 
 <!-- Button trigger modal -->
- <div class="row">
-      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-          <i class="material-icons add_box">Share</i>
-       </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Share</button>
+
+<!-------Modal---------->
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       Thank you for sharing! Return to home page?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No changed my mind</button>
-        <button type="submit" class="btn btn-primary" name="action" value="submit">Yes, Please Share</button>
-      </div>
+    Thank you for Sharing!
     </div>
   </div>
 </div>
- 
-  </div>
-</div>
-</div>
+
+
 </form>
 
  {% endblock %}
