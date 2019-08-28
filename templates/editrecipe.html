@@ -19,13 +19,13 @@
     
 <div class="row">
       <label for="category_age">Select which age group this is suitable for</label>
-        <select class="select" id="category_age" name="category_age"required>
+        <select id="category_age" name="category_age"required>
           <option value=""disabled>choose category</option>
                {% for cat in categories %}
                {% if cat.category_age == recipe.category_age %}
           <option value="{{cat.category_age}}"select>{{cat.category_age}}</option>
              {% else %}
-             <option value="{{cat.category_age}}">{{cat.category_age}}</option>
+             <option value="{{cat.category}}">{{cat.category_age}}</option>
              {% endif %}
                {% endfor %}
         </select>
@@ -211,7 +211,7 @@
         <div class="modal-footer">
     </div>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No changed my mind</button>
-        <button type="onclick="goBack()" class="btn btn-primary" name="action" value="submit"><a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}">Yes, Please Save changes</a></button>
+        <button type="button" class="btn btn-primary" name="action" value="submit"><a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}">Yes, Delete</a></button>
         </div>
       </div>
      </div>

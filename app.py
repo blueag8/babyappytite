@@ -23,17 +23,15 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def home():
-    return render_template("index.html", recipes=mongo.db.recipes.find(), categories=mongo.db.categories.find())
+    return render_template("index.html", categories=mongo.db.categories.find())
     
 #get 
 #single recipe
 
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
-    recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)})
-    categories=mongo.db.categories.find()
-    return render_template("recipe.html", recipes=recipes, categories=categories)
-
+ 
+      return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 #TEST1
     
 #recipes categorized per page route
@@ -82,47 +80,42 @@ def addrecipe():
     #return render_template("addrecipe.html", recipe=recipe)
     #Test1 Failed 
     
-    #Testing2 
+    
     #Testing2 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
+   # if 'image' in request.files:
+        #filename = images.save(request.files['image'])
+        #filepath = '../static/images/' + filename
     recipes=mongo.db.recipes
-    
+
+
     recipe_name=request.form["recipe_name"]
-    category_age=request.form.get("category_age")
+    category_age=request.form["category_age"]
     cooking_time=int(request.form["cooking_time"])
-    portion_sizes=int(request.form["portion_size"]) 
+    portion_size=int(request.form["portion_size"]) 
     allergens=request.form.getlist("allergen")
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
-    
-    if request.method == "POST":
-
-        if request.files:
-
-            image = request.files["image"]
-
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image))
-  
+      
     form={
     
         "recipe_name":recipe_name,
         "category_age":category_age,
         "cooking_time":cooking_time,
-        "portion_size":portion_sizes,
+        "portion_size":portion_size,
         "allergen": allergens,
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-        
+           
           }
           
-     
+        #"image": filepath
+      
     recipes.insert_one(form)
-    
     return redirect(url_for('home'))
-
 
 #edit recipe
 #@app.route('/editrecipe/<recipe_id>', methods=['GET','POST'])
@@ -144,12 +137,12 @@ def editrecipe(recipe_id):
 def update_recipe(recipe_id):
 
      
-    if request.method == "POST":
-       if request.files:
+    #if request.method == "POST":
+      # if request.files:
                      
 
-          recipes=mongo.db.recipes
-          recipes.update( {'_id': ObjectId(recipe_id)},
+    recipes=mongo.db.recipes
+    recipes.update( {'_id': ObjectId(recipe_id)},
   
     {
             'recipe_name':request.form.get("recipe_name"),
@@ -160,7 +153,7 @@ def update_recipe(recipe_id):
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-            'image':request.files["image"]
+            #'image':request.files["image"]
       })
          
           
@@ -171,7 +164,7 @@ def update_recipe(recipe_id):
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-    return redirect(url_for('home'))
+    return redirect(url_for('home', recipe=recipe))
 
 # routing for likes
 #referred to another student's code for likes.
