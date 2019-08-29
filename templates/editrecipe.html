@@ -73,7 +73,7 @@
       <label for="cooking_time">Cooking Time</label>
     
       <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" >
-      <label>(in minutes)</label>
+     (in minutes)
     </div>
 
 
@@ -92,14 +92,13 @@
         </button>
         
          {% for ingredient in recipe.ingredients %}
-        <div><input type="text" name="ingredient" value="{{ingredient}}">
+        <div><input type="text" class="materialize-textarea"name="ingredient" value="{{ingredient}}">
           <a href="#" class="delete">Delete</a></div>
           {% endfor %}
       </div> 
     </div>
    </div> 
- </div>
-   
+
     <div class="recipe_description">
      <label for="recipe_description">Description</label>
        <div class="row">
@@ -121,15 +120,16 @@
           <button class="add_steps">Add Steps &nbsp; 
             <span>+ </span>
           </button>
-          
+          <div class="row">
                 {% for step in recipe.steps %}
-            <div><input type="text" name="step"value="{{step}}">
+            <div><input type="text" class="materialize-textarea"name="step"value="{{step}}">
             <a href="#" class="delete">Delete</a></div>
             {% endfor %}
             </div>
+          </div>
         </div>
      </div>
- </div>
+  </div>
  
 <div class="container-fluid">
    <div class="col-xs-4 col-sm-4 col-md-12"> 
@@ -146,7 +146,7 @@
 
   <div class="container-fluid">
    <div class="row">
-     <div class="col-xs-4 col-sm-4 col-md-6"> 
+     <div class="col-xs-12 col-sm-4 col-md-6"> 
    
 <!-------bootstrap---------->
 <!-- Button trigger modal -->
@@ -187,16 +187,15 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-6"> 
+    <div class="col-xs-12  col-sm-4 col-md-6"> 
       <button type="button" class="img icon" data-toggle="modal" data-target="#delete">
          <img src="/static/image/bin.png" alt="delete a recipe">
        </button>
      </div>
    </div>
   </div>
- </div>
 <!-- Modal -->
-   <div class="modal fade" id="delete_recipe" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered" role="document">
        <div class="modal-content">
         <div class="modal-header">

@@ -157,7 +157,12 @@ def update_recipe(recipe_id):
             'steps':request.form.getlist("step"),
             #'image':request.files["image"]
       })
-         
+     
+        
+    mongo.db.recipes.find_one_and_update(
+        {'_id': ObjectId(recipe_id)},
+        { '$inc': { 'stars': 1}}
+    )    
           
     #flash ("Thank you, your recipe has been added!")
     return redirect(url_for('home'))
@@ -181,7 +186,7 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe',recipe_id=recipe_id))
  
-@app.route("/upload-image", methods=["GET", "POST"])
+#@app.route("/upload-image", methods=["GET", "POST"])
 #def upload_image():
 
   #  if request.method == "POST":
@@ -197,32 +202,29 @@ def stars(recipe_id):
 
 
 
-@app.route('/recipes', methods=['GET', 'POST'])
-def recipes():
+#@app.route('/categories/<category_id>')
+#def get_categories(<category_id):
    
-    if request.method == 'POST':
-      
-       category_age=request.form.get("category_age")
-       category_age=mongo.db.categories.find()
+      # categories=mongo.db.categories.find()
        
-    if recipe.category_age == "6 months +":
-       return redirect(url_for('sixmonth_recipes'))
+   # if recipe.category_age == "6 months +":
+       #return redirect(url_for('sixmonth_recipes'))
        
-    if category_age == "7 months +":
-       return redirect(url_for('sevenmonth_recipes'))
+   # if category_age == "7 months +":
+      # return redirect(url_for('sevenmonth_recipes'))
              
-    if  category_age == "10 months +":
-        return redirect(url_for('tenmonth_recipes'))
+    #if  category_age == "10 months +":
+        #return redirect(url_for('tenmonth_recipes'))
              
-    if category_age == "12 months +":
-       return redirect(url_for('twelvemonth_recipes'))
+   # if category_age == "12 months +":
+      # return redirect(url_for('twelvemonth_recipes'))
     
-    else: 
-        return redirect(url_for('home'))
+    #else: 
+       # return redirect(url_for('home'))
             
             
        
-    return render_template("recipes.html") 
+    #return render_template("recipes.html") 
     
     
 if __name__ == '__main__':

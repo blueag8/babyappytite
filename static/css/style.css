@@ -36,9 +36,9 @@ p.recipe {
     margin-right: 20px;
 }
 
-input[type="text"] {
-    width: 80%; 
-} 
+.materialize-textarea {
+    width: fit-content;
+}
 
 footer {
     margin-top: 30px;
@@ -128,6 +128,12 @@ button{
     margin-left: 0px;
 }
 
+.container-fluid {
+    padding-right: 20px;
+    padding-top: 20px;
+
+}
+
 
 .age img {
     height: 170px;
@@ -141,16 +147,15 @@ apple img {
 img.edit {
     height: 50px;
 }
-.modal {
-    background-color: rgb(0,0,0,0);
-}
 
 .modal .modal-content {
     padding: 50px;
 
 }
 
-
+col-xs-6 {
+    padding: 0px;
+}
 
 
 
