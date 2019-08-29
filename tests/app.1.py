@@ -27,14 +27,12 @@ mongo = PyMongo(app)
 def home():
     return render_template("index.html", categories=mongo.db.categories.find())
     
-@app.route('/getrecipes')
-def getrecipes():
-    return render_template("recipes.html", recipes=mongo.db.recipes.find())
-    
+#get 
 #single recipe
 
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
+ 
       return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 #TEST1
     
@@ -119,7 +117,7 @@ def insert_recipe():
         #"image": filepath
       
     recipes.insert_one(form)
-    return redirect(url_for('getrecipes'))
+    return redirect(url_for('home'))
 
 #edit recipe
 #@app.route('/editrecipe/<recipe_id>', methods=['GET','POST'])
@@ -167,13 +165,13 @@ def update_recipe(recipe_id):
     )    
           
     #flash ("Thank you, your recipe has been added!")
-    return redirect(url_for('getrecipes'))
+    return redirect(url_for('home'))
     
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-    return redirect(url_for('getrecipes', recipe=recipe))
+    return redirect(url_for('home', recipe=recipe))
 
 # routing for likes
 #referred to another student's code for likes.
@@ -224,8 +222,9 @@ def stars(recipe_id):
     #else: 
        # return redirect(url_for('home'))
             
-
-
+            
+       
+    #return render_template("recipes.html") 
     
     
 if __name__ == '__main__':
