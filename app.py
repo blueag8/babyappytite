@@ -12,7 +12,8 @@ app = Flask(__name__)
 
 #set app variables
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI","monogodb://localhost")
+app.config["SECRET_KEY"]= 'yum'
 
 #app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
 
@@ -27,15 +28,24 @@ mongo = PyMongo(app)
 def home():
     return render_template("index.html", categories=mongo.db.categories.find())
     
-@app.route('/getrecipes')
-def getrecipes():
-    return render_template("recipes.html", recipes=mongo.db.recipes.find())
+@app.route('/get_recipes')
+def get_recipes():
+   
+    #TEST
+    category_age=request.form.get("category_age")
+  
     
+    print()
+    
+    return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":category_age}))
+
+    
+
 #single recipe
 
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
-      return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
+      return render_template("recipes.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 #TEST1
     
 #recipes categorized per page route
@@ -75,17 +85,6 @@ def addrecipe():
     
     return render_template("addrecipe.html", categories=mongo.db.categories.find())
 
-#@app.route('/insert_recipe', methods=['POST'])
-#def insert_recipe():
-   # recipes=mongo.db.recipes
-   # recipes.insert(request.form.to.dict(flat=False))
-   # flash ("Thank you, your recipe has been added!")
-
-    #return render_template("addrecipe.html", recipe=recipe)
-    #Test1 Failed 
-    
-    
-    #Testing2 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
    # if 'image' in request.files:
@@ -119,18 +118,8 @@ def insert_recipe():
         #"image": filepath
       
     recipes.insert_one(form)
-    return redirect(url_for('getrecipes'))
+    return redirect(url_for('recipes'))
 
-#edit recipe
-#@app.route('/editrecipe/<recipe_id>', methods=['GET','POST'])
-#def editrecipe(recipe_id):
-   
-    #return render_template("testform.html",recipes=mongo.db.recipes.find(),
-          # categories=mongo.db.categories.find())
-    #return render_template("editrecipe.html",recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}),
-          # categories=mongo.db.categories.find())
-
-#TESTING 
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
     recipe = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
@@ -166,19 +155,19 @@ def update_recipe(recipe_id):
         { '$inc': { 'stars': 1}}
     )    
           
-    #flash ("Thank you, your recipe has been added!")
-    return redirect(url_for('getrecipes'))
+  
+    return redirect(url_for('recipes', recipe_id=recipe_id))
     
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-    return redirect(url_for('getrecipes', recipe=recipe))
+    return redirect(url_for('recipes', recipe_id=recipe_id))
 
 # routing for likes
 #referred to another student's code for likes.
 
-@app.route('/stars/<recipe_id>',methods=["GET", "POST"])
+@app.route('/stars/<recipe_id>', methods=["GET", "POST"])
 def stars(recipe_id):
     
     mongo.db.recipes.find_one_and_update(
@@ -201,29 +190,6 @@ def stars(recipe_id):
 
 
           # return redirect(request.url)   
-
-
-
-#@app.route('/categories/<category_id>')
-#def get_categories(<category_id):
-   
-      # categories=mongo.db.categories.find()
-       
-   # if recipe.category_age == "6 months +":
-       #return redirect(url_for('sixmonth_recipes'))
-       
-   # if category_age == "7 months +":
-      # return redirect(url_for('sevenmonth_recipes'))
-             
-    #if  category_age == "10 months +":
-        #return redirect(url_for('tenmonth_recipes'))
-             
-   # if category_age == "12 months +":
-      # return redirect(url_for('twelvemonth_recipes'))
-    
-    #else: 
-       # return redirect(url_for('home'))
-            
 
 
     

@@ -1,8 +1,9 @@
 {% extends 'base.html'%}{% block content %}
- 
+
+<div class=container> 
  <div class="row">
     <div class="cancel">
-     <button onclick="goBack()">Cancel</button>
+     <button onclick="goBack()"class="btn">Cancel</button>
      </div> 
   </div>
     
@@ -20,7 +21,7 @@
     
         <select id="category_age" name="category_age"required>
           <option value=""disabled>choose category</option>
-          
+    
                {% for cat in categories %}
           <option value="{{cat.category_age}}"select>{{cat.category_age}}</option>
                {% endfor %}
@@ -76,11 +77,11 @@
   </div>
   
   
-<div class="row">
+ <div class="row">
     <div class= "wrapper">  
        <div class="container1">
         <label for="ingredients">Ingredients</label>
-        <button class="add_ingredients">Add Ingredients &nbsp; 
+        <button class="btn add_ingredients">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
         <div><input type="text" name="ingredient" placeholder="Sweet Potato">
@@ -88,7 +89,7 @@
       </div> 
     </div>
   </div> 
-</div>
+
  
  <div class="recipe_description">
     <label for="recipe_description">Description</label>
@@ -103,21 +104,19 @@
       <div class= "wrapper">     
         <div class="container2">
          <label for="Steps">Steps</label>
-          <button class="add_steps">Add Steps &nbsp; 
+          <button class="btn add_steps">Add Steps &nbsp; 
             <span>+ </span>
           </button>
             <div><input type="text" name="step" placeholder="eg. wash vegetables">
             <a href="#" class="delete">Delete</a></div>
             </div>
         </div>
-     </div>
- </div>
- 
-
- <div class="container-fluid">
-   <div class="col-xs-4 col-sm-4 col-md-4"> 
    
-<!--------https://pythonise.com/feed/flask/flask-uploading-files---------------->
+  
+
+ 
+   
+<!--------https://pythonise.com/feed/flask/flask-uploading-files---
 
    <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -125,26 +124,38 @@
   </div>
   <div class="custom-file">
     <input type="file" enctype="multipart/form-data" class="custom-file-input" id="image" name="image">
-    <label class="custom-file-label" for="image">Choose file</label>
+    <label class="btn" for="image">Choose file</label>
+  </div>
+------------->
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#thankyou">
+     Share Recipe
+    </button>
+   </div>
   </div>
 </div>
-
-
-<!-- Button trigger modal -->
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Share</button>
-
-<!-------Modal---------->
-
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-    Thank you for Sharing!
+ 
+<!-- Modal -->
+   <div class="modal fade" id="thankyou" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="thankyou">Recipe added</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        Thank you for sharing!
+        </div>
+        <div class="modal-footer">
+        
+        <button type="submit" class="btn btn-primary" name="action" value="submit">Return to recipes</button>
+        </div>
+      </div>
+     </div>
     </div>
-  </div>
 </div>
-
-
 </form>
 
  {% endblock %}

@@ -3,13 +3,9 @@
 {% for recipe in recipes %}
 <div class="card-deck">
   <div class="card">
-      {% if image in recipe.image %}
-    <img class="card-img-top" src="/static/image/uploads/{{recipe.image}}"  enctype="multipart/form-data" alt="recipe image">
-     {% else %}
-     <img class="card-img-top" src="/static/image/babyappytite.png" alt="recipe image">
-     {% endif %}
      
     <div class="card-body">
+     <a href= "{{url_for('recipe', recipe_id=recipe._id)}}">
       <h5 class="card-title">{{recipe.recipe_name}}</h5>
       <p class="card-text">{{recipe.category_age}}</p>
       <p class="card-text">{{recipe.cooking_time}} Minutes</p>

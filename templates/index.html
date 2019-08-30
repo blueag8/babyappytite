@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends 'base.html' %}{% block content %}
     
-    <title>"Baby Appy-tite | Recipes for 6 months +"</title>
+   
+<form action="{{url_for('get_recipes')}}" name="form" method="POST" class="col s12">
+
+      <label for="category_age">Select which age group this is suitable for</label>
     
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
-</head>
-<body>
-  <div class="main-page">
-    <div class="container-fluid">    
-      <div class="row">
-        <div class="age img">
-         <div class="col-xs-6 col-sm-offset-2 col-md-1 col-md-offset-2">
-          <a href="/sixmonth_recipes" ><img src="/static/image/4-6_month.png" alt="6 months plus"></a>
-         </div>
-        
-         <div class="col-xs-6 col-sm-2 col-md-1 col-md-offset-5">
+        <select id="category_age" name="category_age"required>
+         
+    
+               {% for cat in categories %}
+          <option value="{{cat.category_age}}"select>{{cat.category_age}}</option>
+               {% endfor %}
+  
+        </select>
+      </div>
+ </form>
+         <div class="col-xs-6 ">
            <a href="/sevenmonth_recipes"><img src="/static/image/7_month.png" alt="7 months plus"></a>
          </div>
         </div>
@@ -63,8 +56,5 @@
              <a href="/twelvemonth_recipes"><img src="/static/image/12_month.png" alt="12 months plus"></a>
          </div>
         </div>
-      </div>
-    </div>
-  </div>
- </body>
-</html>
+ {% endblock %}
+ 
