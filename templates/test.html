@@ -1,0 +1,60 @@
+% extends 'base.html' %}{% block content %}
+    
+   
+<form action="{{url_for('get_recipes')}}" name="form" method="POST" class="col s12">
+
+      <label for="category_age">Select which age group this is suitable for</label>
+    
+        <select id="category_age" name="category_age"required>
+         
+    
+               {% for cat in categories %}
+          <option value="{{cat.category_age}}"select>{{cat.category_age}}</option>
+               {% endfor %}
+  
+        </select>
+      </div>
+ </form>
+         <div class="col-xs-6 ">
+           <a href="/sevenmonth_recipes"><img src="/static/image/7_month.png" alt="7 months plus"></a>
+         </div>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="container-fluid">
+       <div class="row">
+          <div class="apple img">
+            <div class="col-xs-6 col-sm-offset-4 col-md-12 col-md-offset-4">
+                <img src="/static/image/babyappytite.png">
+             </div>
+           </div>
+        </div>
+    </div>
+    
+ <div class="container-fluid">
+     <div class="row">
+        <div class="caterpillar img">
+            <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
+                <a href="/addrecipe"><img src="/static/image/caterpillar.png" alt="Share a recipe"></a>
+			</div>
+        </div>
+      </div>
+  </div>
+     
+    <div class="container-fluid">
+       <div class="row">    
+         <div class="age img">
+           <div class="col-xs-6 col-sm-offset-2 col-md-1 col-md-offset-2">
+              <a href="/tenmonth_recipes"><img src="/static/image/10_month.png" alt="10 months plus"></a>
+           </div>
+     
+              
+
+         <div class="col-xs-6 col-sm-3 col-md-1 col-md-offset-5">
+             <a href="/twelvemonth_recipes"><img src="/static/image/12_month.png" alt="12 months plus"></a>
+         </div>
+        </div>
+ {% endblock %}
+ 
