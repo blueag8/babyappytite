@@ -36,7 +36,7 @@ def get_recipes(category_age):
 
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
-      return render_template("recipes.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
+      return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 
 #original routes for category specific recipes
 
@@ -65,9 +65,9 @@ def addrecipe():
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    if 'image' in request.files:
-        filename = images.save(request.files['image'])
-        filepath = '../static/images/' + filename
+   # if 'image' in request.files:
+       # filename = images.save(request.files['image'])
+       # filepath = '../static/images/' + filename
     recipes=mongo.db.recipes
 
 
@@ -90,13 +90,13 @@ def insert_recipe():
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-        "image": filepath
+        #"image": filepath
          
           }
           
         
     recipes.insert_one(form)
-    return redirect(url_for('recipe'))
+    return redirect(url_for('home'))
     
 #edit recipe/update recipe
 
@@ -110,12 +110,12 @@ def editrecipe(recipe_id):
 def update_recipe(recipe_id):
 
      
-    if request.method == "POST":
-       if request.files:
+    #if request.method == "POST":
+      # if request.files:
                      
 
-         recipes=mongo.db.recipes
-         recipes.update( {'_id': ObjectId(recipe_id)},
+    recipes=mongo.db.recipes
+    recipes.update( {'_id': ObjectId(recipe_id)},
   
     {
             'recipe_name':request.form.get("recipe_name"),
@@ -126,7 +126,7 @@ def update_recipe(recipe_id):
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-            'image':request.files["image"]
+            #'image':request.files["image"]
       })
      
         
@@ -135,14 +135,13 @@ def update_recipe(recipe_id):
         { '$inc': { 'stars': 1}}
     )    
           
-  
-    return redirect(url_for('recipe', recipe_id=recipe_id))
     
+    return redirect(url_for('home'))
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
-    return redirect(url_for('recipe', recipe_id=recipe_id))
+    return redirect(url_for('home', recipe_id=recipe_id))
 
 # routing for likes
 #referred to another student's code for likes.
@@ -155,7 +154,7 @@ def stars(recipe_id):
         { '$inc': { 'stars': 1}}
     )
     
-    return redirect(url_for('recipe',recipe_id=recipe_id))
+    return redirect(url_for('recipe', recipe_id=recipe_id))
  
 #upload image
 @app.route("/upload-image", methods=["GET", "POST"])
