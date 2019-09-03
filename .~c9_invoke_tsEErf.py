@@ -1,6 +1,7 @@
 import pymongo
 import os
 
+
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for, flash
 from flask_pymongo import PyMongo
@@ -13,7 +14,8 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI","monogodb://localhost")
 app.config["SECRET_KEY"]= 'yum'
-app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
+
+#app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
 
 mongo = PyMongo(app)
 
@@ -26,35 +28,51 @@ mongo = PyMongo(app)
 def home():
     return render_template("index.html", categories=mongo.db.categories.find())
     
-@app.route('/get_recipes/<category_age>', methods=["GET"])
-def get_recipes(category_age):
+@app.route('/get_recipes')
+def get_recipes():
+    
   
-    print(category_age)
-    return render_template("recipes.html",recipes=mongo.db.recipes.find({"category_age":category_age})) 
+    
+    
+    return render_template("recipes.html", recipes=recipes)
+
 
 #single recipe
 
 @app.route('/recipe/<recipe_id>')
 def recipe(recipe_id):
       return render_template("recipes.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
-
-#original routes for category specific recipes
-
-#@app.route('/sixmonth_recipes')
-#def sixmonth_recipes():
-   #return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"6 months +"}))
-
-#@app.route('/sevenmonth_recipes')
-#def sevenmonth_recipes():
-    #return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"7 months +"}))
-
-#@app.route('/tenmonth_recipes')
-#def tenmonth_recipes():
-    #return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"10 months +"}))
+#TEST1
     
-#@app.route('/twelvemonth_recipes')
-#def twelvemonth_recipes():
-    #return render_template("recipes.html",recipes=mongo.db.recipes.find({"category_age":"12 months +"}))
+#recipes categorized per page route
+
+#@app.route('/recipes')
+#def recipes():
+   # recipes=mongo.db.recipes.find()
+    #TEST
+    #for recipe in recipes:
+      #  print(recipe)
+        
+   # return render_template("recipes.html")
+   
+   
+#sort recipes by age group 
+
+@app.route('/sixmonth_recipes')
+def sixmonth_recipes():
+   return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"6 months +"}))
+
+@app.route('/sevenmonth_recipes')
+def sevenmonth_recipes():
+    return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"7 months +"}))
+
+@app.route('/tenmonth_recipes')
+def tenmonth_recipes():
+    return render_template("recipes.html", recipes=mongo.db.recipes.find({"category_age":"10 months +"}))
+    
+@app.route('/twelvemonth_recipes')
+def twelvemonth_recipes():
+    return render_template("recipes.html",recipes=mongo.db.recipes.find({"category_age":"12 months +"}))
 
 #add recipe 
 
@@ -65,13 +83,13 @@ def addrecipe():
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    if 'image' in request.files:
-        filename = images.save(request.files['image'])
-        filepath = '../static/images/' + filename
+   # if 'image' in request.files:
+        #filename = images.save(request.files['image'])
+        #filepath = '../static/images/' + filename
     recipes=mongo.db.recipes
 
 
-    recipe_name=request.form["recipe_name"]
+def addrecipe():
     category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
     portion_size=int(request.form["portion_size"]) 
@@ -90,15 +108,13 @@ def insert_recipe():
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-        "image": filepath
-         
+           
           }
           
-        
+        #"image": filepath
+      
     recipes.insert_one(form)
     return redirect(url_for('recipe'))
-    
-#edit recipe/update recipe
 
 @app.route('/editrecipe/<recipe_id>')
 def editrecipe(recipe_id):
@@ -110,12 +126,12 @@ def editrecipe(recipe_id):
 def update_recipe(recipe_id):
 
      
-    if request.method == "POST":
-       if request.files:
+    #if request.method == "POST":
+      # if request.files:
                      
 
-         recipes=mongo.db.recipes
-         recipes.update( {'_id': ObjectId(recipe_id)},
+    recipes=mongo.db.recipes
+    recipes.update( {'_id': ObjectId(recipe_id)},
   
     {
             'recipe_name':request.form.get("recipe_name"),
@@ -126,7 +142,7 @@ def update_recipe(recipe_id):
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
-            'image':request.files["image"]
+            #'image':request.files["image"]
       })
      
         
@@ -157,20 +173,19 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe',recipe_id=recipe_id))
  
-#upload image
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
+#@app.route("/upload-image", methods=["GET", "POST"])
+#def upload_image():
 
-    if request.method == "POST":
+  #  if request.method == "POST":
 
-        if request.files:
+      #  if request.files:
 
-            image = request.files["image"]
+          #  image = request.files["image"]
 
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+          # image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
 
 
-            return redirect(request.url)   
+          # return redirect(request.url)   
 
 
     
