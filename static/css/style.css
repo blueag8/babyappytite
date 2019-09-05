@@ -1,4 +1,5 @@
 /*---------Navbar----------*/
+
 .navbar {
     position: relative;
     min-height: 50px;
@@ -6,15 +7,17 @@
     border: none;
     background-color: transparent;
 }
+
 .navbar-brand img {
     height: 50px;
 }
-   
- /* icon prefix focus color */
+
+/* icon prefix focus color */
+
 .input-field .prefix.active {
-     color: red;
-   }
-   
+    color: red;
+}
+
 .btn {
     background-color: #55a626;
     margin: 20px;
@@ -27,17 +30,20 @@ btn:hover, .btn-large:hover {
 .img.icon {
     background: none;
     border: none;
-} 
+}
 
 p.recipe {
     float: right;
     background: mediumseagreen;
-    padding: 15px;
-    margin-right: 20px;
 }
 
 .materialize-textarea {
     width: fit-content;
+}
+
+.container {
+    width: 80%;
+    margin-bottom:20px;
 }
 
 footer {
@@ -46,7 +52,6 @@ footer {
 
 /*--------images---------------------*/
 
-
 img {
     height: 170px;
 }
@@ -54,10 +59,10 @@ img {
 img .edit {
     height: 80px;
 }
+
 .apple img {
     height: 250px;
 }
-
 
 .caterpillar img {
     height: 128px;
@@ -74,6 +79,7 @@ img .edit {
     transition: box-shadow .25s, -webkit-box-shadow .25s;
     border-radius: 2px;
 }
+
 card-body {
     font-size: large;
     text-align: justify;
@@ -99,66 +105,51 @@ a {
     color: #0c0c0c;
     background-color: #fff;
     background-image: none;
+}
 
-} 
 label {
-   color: #0c0c0c;
+    color: #0c0c0c;
     font-family: 'Emilys Candy', cursive;
     /* font-family: Emily; */
     font-size: 15px;
 }
 
-button{
+button {
     background-color: #4bf524;
     font-family: 'Emily';
 }
+
 .delete {
     color: #db1f1f;
 }
 
-
 /*-----Media Queries--------*/
 
-@media (min-width: 375px)
-{
-
-.row {
-   
-    margin-bottom: 0px; 
-    margin-left: 0px;
+@media (min-width: 375px) {
+    .row {
+        margin-bottom: 0px;
+        margin-left: 0px;
+    }
+    .container-fluid {
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+    .age img {
+        height: 170px;
+    }
+    apple img {
+        height: 180px;
+    }
+    .caterpillar img {
+        height: 80px;
+    }
+    img.edit {
+        height: 50px;
+    }
+    .modal .modal-content {
+        padding: 50px;
+    }
+    col-offset-s6 {
+        padding: 0px;
+    }
 }
-
-.container-fluid {
-    padding-right: 20px;
-    padding-top: 20px;
-
-}
-
-
-.age img {
-    height: 170px;
-}
-apple img {
-    height: 180px;
-}
-.caterpillar img {
-    height: 80px;
-}
-img.edit {
-    height: 50px;
-}
-
-.modal .modal-content {
-    padding: 50px;
-
-}
-
-col-xs-6 {
-    padding: 0px;
-}
-
-
-
-
-}
-

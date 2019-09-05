@@ -1,17 +1,21 @@
 {% extends 'base.html' %}{% block content %}
 
+<!-------list all recipes by category using materialize cards--------->
+
 {% for recipe in recipes %}
+
 <div class="card-deck">
-  <div class="card">
-     
+  
+    <div class="card">
     <div class="card-body">
-     <a href= "{{url_for('recipe', recipe_id=recipe._id)}}">
+     <a href= "{{url_for('recipe',recipe_id=recipe._id)}}">
+      <img class="card-img-top" src="{{recipe.image}}" alt="recipe image"></img>
       <h5 class="card-title">{{recipe.recipe_name}}</h5>
       <p class="card-text">{{recipe.category_age}}</p>
       <p class="card-text">{{recipe.cooking_time}} Minutes</p>
       <p class ="card-img-small"><img src="/static/image/star.png" alt="stars">{{recipe.stars}}</p>
       <p class="recipe"><a href="{{url_for('recipe', recipe_id=recipe._id)}}" img src="">Got to Recipe</a></p>
-      <p class="card-text"><a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><image class="edit"img src="/static/image/edit.png" alt="edit a recipe"></a></p>
+      <p class="card-text"><a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><image class="edit" img src="/static/image/edit.png" alt="edit a recipe"></a></p>
     </div>
   </div>
   
@@ -20,15 +24,13 @@
 
 <!----image from https://www.seekclipart.com/clipart/ixTJJR_collection-of-free-centipede-drawing-transparent-background-caterpillar/------->
 
-<div class="container-fluid">
-        <div class="row">
-            <div class="caterpillar img">
-             <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
-                <a href="{{url_for('addrecipe')}}"><img src="/static/image/caterpillar.png" alt="Share a recipe"></a>
-				</div>
-             </div>
+   <div class="row">
+        <div class="caterpillar img">
+            <div class="col offset-s4 col offset-s6 col m12 col offset-m6">
+                <a href="{{url_for('addrecipe')}}"><img alt="Share a recipe" src="/static/image/caterpillar.png"></a>
+            </div>
         </div>
-     </div>
+    </div>
 
 
 {% endblock %}

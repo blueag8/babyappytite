@@ -9,11 +9,11 @@
     
   <h3>Edit Recipe</h3>
   
-  <div class="form group ">   
-    <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" name="form" method="POST" enctype="multipart/form-data" class="col s12">
+  <div class="form ">   
+    <form action="{{url_for('update_recipe',recipe_id=recipe._id)}}" name="form" method="POST" enctype="multipart/form-data" class="col s12">
       <div class="row">
        <label class="recipe_name">Recipe Name</label>
-       <input type="materialize-textarea" class="form-control" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
+       <input type="text" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">
       </div>
 
 <!------removed row to include category age in input= text and class= form-control which allowed the value to be sent-------->
@@ -72,14 +72,14 @@
     <div class="row">
       <label for="cooking_time">Cooking Time</label>
     
-      <input type="number" name="cooking_time" min="0" max="100" step="1" value="{{recipe.cooking_time}}" >
+      <input type="number" name="cooking_time" min="0" max="200" step="1" value="{{recipe.cooking_time}}" >
      (in minutes)
     </div>
 
 
    <div class="row">
     <label for="portion_size">Serving Size</label>
-    <input type="number" name="portion_size" min="0" max="100" step="1" value="{{recipe.portion_size}}">
+    <input type="number" name="portion_size" min="0" max="200" step="1" value="{{recipe.portion_size}}">
    </div>
  
    
@@ -106,14 +106,11 @@
         </div>
       </div>
 
-    
-<!---referred to ----https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
-
-
- 
  <div class="steps">
     <label for="add_steps">Cooking instructions</label>
+    
 <!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
+
       <div class= "wrapper">     
         <div class="container2">
          <label for="Steps">Steps</label>
@@ -131,7 +128,7 @@
      </div>
   </div>
  
-
+<!-------future image input area
    <div class="col-xs-4 col-sm-4 col-md-12"> 
     <div class="input-group mb-3">
      <div class="input-group-prepend">
@@ -141,8 +138,9 @@
       </div>
      </div>
     </div>
+---------->
 
-  <!-- Modal Trigger -->
+  <!-- Modal Trigger Materialize-->
 <button data-target="update_recipe" class="btn modal-trigger">Update</button>
 
   <!-- Modal Structure -->
@@ -159,7 +157,7 @@
 
 <!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#delete_recipe">Delete</a>
+  <a class="modal-trigger" href="#delete_recipe"><img src="/static/image/bin.png"></a>
 
   <!-- Modal Structure -->
   <div id="delete_recipe" class="modal">
