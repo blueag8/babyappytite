@@ -95,10 +95,10 @@ def insert_recipe():
          }
           
     #image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))   
-
-    
-    recipes.insert_one(form)
-    return redirect(url_for('home'))
+   
+    recipe= recipes.insert_one(form)
+    print(recipe.inserted_id)
+    return redirect(url_for('recipe',recipe_id=recipe.inserted_id))
     
 #edit recipe/update recipe
 
