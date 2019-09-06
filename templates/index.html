@@ -1,31 +1,33 @@
 {% extends 'base.html' %}{% block content %}
 
- <div class="row">
-    {% for cat in categories %}
-      <a href="/get_recipes/{{cat.category_age}}">{{cat.category_age}}</a>
-      <br></br>
-      {% endfor %}
-</div>
 
-    <div class="container-fluid">
-       <div class="row">
-          <div class="apple img">
-            <div class="col-xs-6 col-sm-offset-4 col-md-12 col-md-offset-4">
-                <img src="/static/image/babyappytite.png">
-             </div>
-           </div>
-        </div>
-    </div>
-    
- <div class="container-fluid">
-     <div class="row">
-        <div class="caterpillar img">
-            <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
-                <a href="/addrecipe"><img src="/static/image/caterpillar.png" alt="Share a recipe"></a>
-			</div>
-        </div>
+<!------homepage--------->
+
+ <div class="col s12">
+     
+      {% for cat in categories %} 
+ 
+       <a href="/get_recipes/{{cat.category_age}}"><img src="{{cat.image}}"></a>
+       
+          {% endfor %}
+       
+  </div>
+
+   <div class="row">
+      <div class="col s6 offset-s2">
+         <img class="apple img" src="/static/image/babyappytite.png">
       </div>
   </div>
+   
+   
+ 
+    <div class="row">
+      <div class="col s12 offset-m6">
+        <a href="/addrecipe"><img class="caterpillar img" src="https://res.cloudinary.com/blueag8/image/upload/v1567665021/Babyappytite/caterpillar_img_r43s7x.png" alt="Share a recipe"></a>
+	   </div>
+    </div>
+  </div>
+</div>
      
  {% endblock %}
  

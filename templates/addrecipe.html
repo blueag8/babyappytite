@@ -10,7 +10,8 @@
   <h3>Add Recipe</h3>
   
 <div class="form">
-<form action="{{ url_for('insert_recipe')}}" name="form" method="POST" class="col s12">
+<form action="{{url_for('insert_recipe')}}" name="form" method="POST" class="col s12">
+
   <div class="row">
     <label class="recipe_name">Recipe Name</label>
       <input type="text" class="form-control" id="recipe_name" name="recipe_name" placeholder="eg. Sweet Potato Mash">
@@ -67,18 +68,18 @@
 <div class="row">
     <label for="cooking_time">Cooking Time</label>
     
-      <input type="number" name="cooking_time" min="0" max="100" step="1" value="1">
+      <input type="number" name="cooking_time" min="0" max="200" step="1" value="1">
       <label>(in minutes)</label>
   </div>
   
  <div class="row">
     <label for="portion_sizes">Serving Size</label>
-    <input type="number" name="portion_size" min="0" max="100" step="1" value="1">
+    <input type="number" name="portion_size" min="0" max="200" step="1" value="1">
   </div>
   
   
  <div class="row">
-    <div class= "wrapper">  
+    <div class= "wrapper1">  
        <div class="container1">
         <label for="ingredients">Ingredients</label>
         <button class="btn add_ingredients">Add Ingredients &nbsp; 
@@ -100,8 +101,10 @@
 
  <div class="steps">
     <label for="add_steps">Cooking instructions</label>
-<!-------https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
-      <div class= "wrapper">     
+    
+<!-------referred to https://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form ----->
+      
+      <div class= "wrapper2">     
         <div class="container2">
          <label for="Steps">Steps</label>
           <button class="btn add_steps">Add Steps &nbsp; 
@@ -112,21 +115,6 @@
             </div>
         </div>
    
-  
-
- 
-   
-<!--------https://pythonise.com/feed/flask/flask-uploading-files---
-
-   <div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text">Upload</span>
-  </div>
-  <div class="custom-file">
-    <input type="file" enctype="multipart/form-data" class="custom-file-input" id="image" name="image">
-    <label class="btn" for="image">Choose file</label>
-  </div>
-------------->
 
    <!-- Modal Trigger -->
   <button data-target="share_recipe" class="btn modal-trigger">Share Recipe</button>

@@ -5,16 +5,14 @@
    
   {% for recipe in recipes %}
   
- {% if image in recipe.image %}
-    <img class="card-img-top" src="/static/image/uploads/{{recipe.image}}" enctype="multipart/form-data"  alt="recipe image">
-     {% else %}
-     <img class="card-img-top" src="/static/image/babyappytite.png" alt="recipe image">
-     {% endif %}
-    
+
+    <img class="card-img-top" src="{{recipe.image}}" enctype="multipart/form-data"  alt="recipe image">
+  
+     
     <div class="card-body">
       <h5 class="card-title"><a href="{{url_for('recipe', recipe_id=recipe._id)}}">{{recipe.recipe_name}}</a></h5>
       
-      <button><a href="{{url_for('stars', recipe_id=recipe._id)}}"><img src="/static/image/star.png" alt="like a recipe">{{recipe.stars}}</a></button>
+      <button><a href="{{url_for('stars',recipe_id=recipe._id)}}"><img src="https://res.cloudinary.com/blueag8/image/upload/v1567665022/Babyappytite/star_img_cjiku5.png" alt="like a recipe">{{recipe.stars}}</a></button>
        
         <p class="card-text">{{recipe.category_age}}</p>
          
@@ -44,7 +42,7 @@
     </p>
      
     </div>
-    <div>
+       <div>
        <p class="card-text">{{recipe.description}}</p>
        </div>
        <p class="card-text">
@@ -60,18 +58,19 @@
    </div>
 <!-------image from https://www.seekclipart.com/clipart/hhomm_view-and-edit-icon-clipart/ ------->
 
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
           <div class="caterpillar img">
              <div class="col-xs-offset-4 col-sm-offset-6 col-md-12 col-md-offset-6">
                 <a href="{{url_for('editrecipe', recipe_id=recipe._id)}}"><img src="/static/image/edit.png" alt="edit a recipe"></a>
-			    </div>
+			  </div>
             </div>
+          <button onclick="goBack()">Return to other recipes</button>
         </div>
-     </div>
-     
+    </div>
+
 <!-------------HTML DOM SCRIPT from https://www.w3schools.com/jsref/met_his_back.asp--------->
-<button onclick="goBack()">Return to other recipes</button>
+
 
 
      

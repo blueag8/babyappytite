@@ -1,9 +1,14 @@
 import pymongo
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 from bson.objectid import ObjectId
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
+from werkzeug.utils import secure_filename
+
 
 #connect to database
 app = Flask(__name__)
@@ -12,14 +17,19 @@ app = Flask(__name__)
 #set app variables
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI","monogodb://localhost")
-app.config["SECRET_KEY"]= 'yum'
-app.config["IMAGE_UPLOADS"] ="/home/ubuntu/environment/static/image/uploads"
+
+app.config["SECRET_KEY"] = 'yum'
+
+app.config["CLOUDINARY_URL"] = os.environ.get("CLOUDINARY_URL")
+app.config["cloud_name"] = os.environ.get("CLOUDINARY_CLOUD_NAME")
+app.config["api_key"] = os.environ.get("CLOUDINARY_API_KEY")
+app.config["api_secret"] = os.environ.get("CLOUDINARY_API_SECRET")
+
 
 mongo = PyMongo(app)
 
 
 #home page
-
 
 
 @app.route('/')
@@ -28,10 +38,10 @@ def home():
     
 @app.route('/get_recipes/<category_age>', methods=["GET"])
 def get_recipes(category_age):
-  
+    
     print(category_age)
     return render_template("recipes.html",recipes=mongo.db.recipes.find({"category_age":category_age})) 
-
+    
 #single recipe
 
 @app.route('/recipe/<recipe_id>')
@@ -65,21 +75,23 @@ def addrecipe():
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-   # if 'image' in request.files:
-       # filename = images.save(request.files['image'])
-       # filepath = '../static/images/' + filename
+    
     recipes=mongo.db.recipes
 
+    #if request.method == "POST":
+
+       # if request.files:
 
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
-    portion_size=int(request.form["portion_size"]) 
+    portion_size=int(request.form["portion_size"])
     allergens=request.form.getlist("allergen")
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
-      
+           # image = flask.request.files.get["image"]
+    
     form={
     
         "recipe_name":recipe_name,
@@ -90,11 +102,13 @@ def insert_recipe():
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-        #"image": filepath
+       
          
-          }
+         }
           
-        
+    #image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))   
+    print("Image saved")
+
     recipes.insert_one(form)
     return redirect(url_for('home'))
     
@@ -144,7 +158,7 @@ def delete_recipe(recipe_id):
     return redirect(url_for('home', recipe_id=recipe_id))
 
 # routing for likes
-#referred to another student's code for likes.
+#referred to another student's code for likes. https://github.com/Deirdre18/dumpdinners-recipe-app/blob/master/app.py
 
 @app.route('/stars/<recipe_id>', methods=["GET", "POST"])
 def stars(recipe_id):
@@ -156,23 +170,7 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe', recipe_id=recipe_id))
  
-#upload image
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
 
-    if request.method == "POST":
-
-        if request.files:
-
-            image = request.files["image"]
-
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-
-
-            return redirect(request.url)   
-
-
-    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
