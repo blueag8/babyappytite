@@ -70,12 +70,13 @@ def insert_recipe():
     
     recipes=mongo.db.recipes
 
-
+    print(request.form)
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
     portion_size=int(request.form["portion_size"])
-    allergens=request.form.getlist("allergen"),
+    allergens=request.form.getlist("allergen")
+    print("allergen",allergens)
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
@@ -95,7 +96,7 @@ def insert_recipe():
           
     #image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))   
 
-
+    
     recipes.insert_one(form)
     return redirect(url_for('home'))
     
@@ -117,6 +118,7 @@ def update_recipe(recipe_id):
 
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
+   
   
     {
             'recipe_name':request.form.get("recipe_name"),
@@ -130,13 +132,13 @@ def update_recipe(recipe_id):
             #'image':request.files["image"]
       })
      
-        
+    
     mongo.db.recipes.find_one_and_update(
         {'_id': ObjectId(recipe_id)},
         { '$inc': { 'stars': 1}}
     )    
           
-    
+    print(request.form)
     return redirect(url_for('home'))
     
 @app.route('/delete_recipe/<recipe_id>')
@@ -162,4 +164,4 @@ def stars(recipe_id):
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=False)
+            debug=True)

@@ -1,6 +1,85 @@
 #Babyappytite
+ 
+##About Project 
+
+This is a data centric project which utiizes MongoDB, a noSql database to 
+store data and a Flask driven app to provide a user driven application which allows
+users to 'Create', 'Read','Update' and 'Delete' information provided on the website.
+
+The main technologies used for this project include HTML, CSS, JavaScript, Python+Flask.
+Along with the frameworks provided by https://materializecss.com/
+
+The initial idea was to create an application for 'parents and caregivers' of 
+children aged from six to twelve months plus. This application would allow users 
+to share and access recipes for children to help with the 'weaning' process. 
+
+"Weaning is the process of gradually introducing an infant to what will be its adult diet while withdrawing the supply of its "mother's" milk.""
+
+Because it is very important that a child is weaned in stages, usally by months at 
+a time, the recipes are grouped by age.
+
+#The Schema used for storing this data in MongoDB is as follows:
+
+The database "Baby_Recipes", contains two collections: "Categories" and "Recipes".
+Both of these collections contain a Key "category_age" with corresponding values
+ie. "category_age": "6 months +"
 
 
+
+![alt wireframe](Schema_Categories.png "recipes")
+
+![alt wireframe](Schema_Recipe.png "categories")
+
+
+Issues
+
+
+
+
+
+
+
+Future implementations
+
+-Registered login/user identity
+-ability to only edit or delete 'user' owned entries
+-Image upload
+-Social media links
+-Search bar
+-Allergen filter 
+-Commenting ability
+
+
+
+
+
+
+
+
+##links
+
+view herokuapp [here]
+
+https://babyappytite.herokuapp.com
+
+view development [here]
+
+https://us-east-1.console.aws.amazon.com/cloud9/ide/1a05c8f8cda04b528eac19bc618c2909
+
+github repository [here]
+
+https://github.com/blueag8/babyappytite
+
+to test app in development set configuration as follows:
+
+
+
+
+
+
+
+
+![alt wireframe](wireframeforbabyappytite.jpg "mockup")
 
 
 ##UX
@@ -21,7 +100,7 @@ For some/all of your features, you may choose to reference the specific project 
 
 In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
-Features Left to Implement
+##Features Left to Implement
 Another feature idea
 Technologies Used
 In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
