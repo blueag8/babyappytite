@@ -11,6 +11,7 @@
   
   <div class="form ">   
     <form action="{{url_for('update_recipe',recipe_id=recipe._id)}}" name="form" method="POST" enctype="multipart/form-data" class="col s12">
+      <img class="card-img-top" src="{{recipe.image | default('/static/image/babyappytite.png')}}" alt="recipe image"></img>
       <div class="row">
        <label class="recipe_name">Recipe Name</label>
        <input type="text" id="recipe_name" name="recipe_name" value="{{recipe.recipe_name}}">

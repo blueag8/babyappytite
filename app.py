@@ -75,7 +75,7 @@ def insert_recipe():
     category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
     portion_size=int(request.form["portion_size"])
-    allergens=request.form.getlist("allergen")
+    allergens=request.form.getlist("allergen"),
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
@@ -162,4 +162,4 @@ def stars(recipe_id):
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)

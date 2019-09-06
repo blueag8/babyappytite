@@ -9,7 +9,8 @@
     <div class="card">
     <div class="card-body">
      <a href= "{{url_for('recipe',recipe_id=recipe._id)}}">
-      <img class="card-img-top" src="{{recipe.image}}" alt="recipe image"></img>
+      <img class="card-img-top" src="{{recipe.image | default('/static/image/babyappytite.png')}}" alt="recipe image"></img>
+  
       <h5 class="card-title">{{recipe.recipe_name}}</h5>
       <p class="card-text">{{recipe.category_age}}</p>
       <p class="card-text">{{recipe.cooking_time}} Minutes</p>
