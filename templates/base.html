@@ -37,18 +37,18 @@
     
     $(document).ready(function(){
     
-    var max_fields = 10;
+    var max_fields =20;
     var wrapper1 = $(".container1");
     var wrapper2 = $(".container2");
-    var add_ingredient = $(".add_ingredients");
-    var add_step = $(".add_steps");
+    var add_ingredient = $(".ingredient");
+    var add_step = $(".step");
     var x = 1;
     
     $(add_ingredient).click(function(e) {
         e.preventDefault();
         if (x < max_fields) {
             x++;
-            $(wrapper1).append('<div><ol><input type="text" name="ingredient[]"/></ol><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper1).append('<div><ol><input type="text" name="ingredient"/></ol><a href="#" class="delete">Delete</a></div>'); //add input box
         } else {
             alert('You Reached the limits');
         }
@@ -64,7 +64,7 @@
         e.preventDefault();
         if (x < max_fields) {
             x++;
-            $(wrapper2).append('<div><ol><input type="text" name="step[]"/></ol><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper2).append('<div><ol><input type="text" name="step"/></ol><a href="#" class="delete">Delete</a></div>'); //add input box
         } else {
             alert('You Reached the limits');
         }
@@ -85,12 +85,7 @@
     
     </script>   
     
-    <script>
-    function goBack() {
-    window.history.back();
-    }
-    </script>
- 
+   
 
 
  

@@ -1,8 +1,5 @@
 import pymongo
 import os
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for
@@ -19,11 +16,6 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI","monogodb://localhost")
 
 app.config["SECRET_KEY"] = 'yum'
-
-app.config["CLOUDINARY_URL"] = os.environ.get("CLOUDINARY_URL")
-app.config["cloud_name"] = os.environ.get("CLOUDINARY_CLOUD_NAME")
-app.config["api_key"] = os.environ.get("CLOUDINARY_API_KEY")
-app.config["api_secret"] = os.environ.get("CLOUDINARY_API_SECRET")
 
 
 mongo = PyMongo(app)
@@ -78,9 +70,6 @@ def insert_recipe():
     
     recipes=mongo.db.recipes
 
-    #if request.method == "POST":
-
-       # if request.files:
 
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
@@ -102,12 +91,10 @@ def insert_recipe():
         "ingredient": ingredients,
         "recipe_description":recipe_description,
         "step": steps,
-       
-         
          }
           
     #image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))   
-    print("Image saved")
+
 
     recipes.insert_one(form)
     return redirect(url_for('home'))
@@ -136,7 +123,7 @@ def update_recipe(recipe_id):
             'category_age':request.form.get("category_age"),
             'cooking_time':int(request.form["cooking_time"]),
             'portion_size':int(request.form["portion_size"]),
-            'allergens':request.form.getlist('check'),
+            'allergens':request.form.getlist("allergen"),
             'ingredients':request.form.getlist("ingredient"),
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),

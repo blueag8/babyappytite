@@ -31,36 +31,41 @@
         </select>
       </div>
  
-     <div class="row">
-      <div class = "allergens">
-      <label class="allergens">Please select which allergens are or may be in the recipe</label>
-      
+ <div class="row">
+  <div class = "allergens">
+     <label for="allergens" name="allergen">Please select which allergens are or may be in the recipe</label>
+     
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="nut" name="nut" value="nut">
+        <input class="form-check-input" type="checkbox" id="nut" name="allergen" value="nut">
         <label class="form-check-label" for="nut">Nut</label>
       </div>
-      
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="meat" name="allergen" value="meat">
+    
+     <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="meat" name="allergn" value="meat">
         <label class="form-check-label" for="meat">Meat</label>
-      </div>
-      
-      <div class="form-check form-check-inline">
+     </div>
+  
+     <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="dairy" name="allergen" value="dairy">
         <label class="form-check-label" for="dairy">Dairy</label>
+     </div>
+    
+     <div class="form-check form-check-inline">
+       <input class="form-check-input" type="checkbox" id="gluten" name="allergen" value="gluten">
+        <label class="form-check-label" for="gluten">Gluten</label>
+     </div>
+     
+     <div class="form-check form-check-inline"> 
+        <input class="form-check-input" type="checkbox" id="seafood" name="allergen" value="seafood">
+        <label class="form-check-label" for="seafood">Seafood</label>
       </div>
       
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="seafood" name="allergen " value="seafood">
-        <label class="form-check-label" for="seafood">Seafood</label>
-      </div> 
-      
-      <div class="form-check form-check-inline">
+     <div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" id="soy" name="allergen" value="soy">
         <label class="form-check-label" for="soy">Soy</label>
-      </div>
-    </div>
+     </div>
    </div>
+ </div>
 
 <div class="row">
     <label for="cooking_time">Cooking Time</label>
@@ -113,22 +118,23 @@
         </div>
    
 
- <!-- Modal Trigger Materialize-->
-<button data-target="share_recipe" class="btn modal-trigger">Share</button>
+ 
+
+   <!-- Modal Trigger -->
+  <button data-target="share_recipe" class="btn modal-trigger">Share Recipe</button>
+
 
   <!-- Modal Structure -->
   <div id="share_recipe" class="modal">
     <div class="modal-content">
-      <h4>Thank you for Sharing!</h4>
-       <p><img src="/static/image/submit.png"></p>
-      <p>Changed your mind? Click outside this notification box to return to edit form</p>
+      <h4>Thank you for sharing!</h4>
+      <p><img src="/static/image/submit.png"></p>
     </div>
     <div class="modal-footer">
-     <button><a class="modal-action modal-close waves-effect waves-green btn-flat">Return to recipes</a></button> 
+     <button><a href="{{url_for('home')}}" class="modal-action modal-close waves-effect waves-green btn-flat">Return to recipes</a></button> 
     </div>
   </div>
-          
-
+</div>
 </form>
 
  {% endblock %}

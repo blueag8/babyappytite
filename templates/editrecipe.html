@@ -28,7 +28,7 @@
               {% for cat in categories %}
                
       {% if cat.category_age == recipe.category_age %}
-         <option value="{{cat.category_age}}" selected>{{cat.category_age}}</option>
+         <option value="{{cat.category_age}}"selected>{{cat.category_age}}</option>
             {% else %}
             
         <option value="{{cat.category_age}}">{{cat.category_age}}</option>
@@ -87,7 +87,7 @@
     <div class= "wrapper1">  
        <div class="container1">
         <label for="ingredients">Ingredients</label>
-        <button class="add_ingredients">Add Ingredients &nbsp; 
+        <button class="ingredient">Add Ingredients &nbsp; 
           <span>+ </span>
         </button>
         
@@ -113,8 +113,8 @@
 
       <div class= "wrapper2">     
         <div class="container2">
-         <label for="Steps">Steps</label>
-          <button class="add_steps">Add Steps &nbsp; 
+         <label for="steps">Steps</label>
+          <button class="step">Add Steps &nbsp; 
             <span>+ </span>
           </button>
           <div class="row">
@@ -157,7 +157,7 @@
 
 <!------ image from https://www.seekclipart.com/clipart/mimJ_garbage-can-pictures-garbage-bin-clip-art-png/----->     
  <!-- Modal Trigger -->
-  <a class="modal-trigger" href="#delete_recipe"><img src="/static/image/bin.png"></a>
+  <a class="modal-trigger" data-target="delete_recipe"><img src="/static/image/bin.png"></a>
 
   <!-- Modal Structure -->
   <div id="delete_recipe" class="modal">
@@ -173,7 +173,12 @@
      </div>
 </form>
 
-
+ <script>
+    function goBack() {
+    window.history.back();
+    }
+    </script>
+ 
 
  {% endblock %}
  
