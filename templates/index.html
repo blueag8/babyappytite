@@ -1,34 +1,55 @@
-{% extends 'base.html' %}{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>"Baby Appy-tite | Recipes for 6 months +"</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Emilys+Candy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
+</head>
 
+<body>
+   
 
 <!------homepage--------->
 
 
   <div class="category_age">
-      <div class="col s6 offset-s2 col m3">
       {% for cat in categories %} 
      <img class="age">
   <a href="/get_recipes/{{cat.category_age}}"><img class="age" src="{{cat.image}}"></a> 
    </img>
           {% endfor %}
       </div>
-  </div>
 
    <div class="logo">
-      <div class="col s6 offset-s2">
-         <img class="apple" src="/static/image/logo.png">
+      <div class="row">
+         <img class="apple_logo" src="/static/image/logo.png">
       </div>
   </div>
    
    
  
     <div class="share">
-      <div class="col s12 offset-m6">
-        <a href="/addrecipe"><img class="share" src="/static/image/caterpillar_img.png" alt="Share a recipe"></a>
+      <div class="row">
+        <a href="/addrecipe"><img class="caterpillar_img" src="/static/image/caterpillar_img.png" alt="Share a recipe"></a>
 	   </div>
     </div>
   </div>
 </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  
+    
+</body>
+</html>
+
      
- {% endblock %}
+
  

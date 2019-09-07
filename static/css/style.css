@@ -51,29 +51,36 @@ footer {
 }
 
 /*--------images---------------------*/
-
+.age {
+    margin-left: 80px;
+    margin-top: 100px;
+}
+  
 
 .edit {
     height: 80px;
 }
 
- .share {
-    
+ .caterpillar_img {
+    position: relative;
+    bottom: 100px;
+    margin-right:100px;
     float: right;
 }
-  .apple {
+  .apple_logo {
     height: 350px;
+    margin-left: 100px;
+    
 }
-  .age {
-    height: 200px; 
-    float: left;
-  }
 
 .card {
     margin: 20px;
     padding: 20px;
     position: relative;
     background-color: #beefaf;
+}
+ .card-img-top {
+    height: 150px;
 }
 
 card-body {
@@ -121,34 +128,32 @@ button {
 
 /*-----Media Queries--------*/
 
-@media (max-width: 375px) {
-    .row {
-        margin-bottom: 0px;
-        margin-left: 0px;
-    }
-   .card-img-top {
-    height: 220px;
-}
-   .logo {
-    margin-left: 50px;
+@media (max-width: 760px) {
+  
+  
+   .apple_logo {
+    height:180px;
    }
- 
+  
    .thanks {
     height: 200px;
 }
-   .share {
-    margin-left: 100px;
+   .caterpillar_img {
+    position:relative;
+    bottom:20px;
 }
-  .apple {
+   .apple {
     height: 150px;
 }
-    .age {
-    height: 120px; 
-  }
+  
    .edit {
         height: 50px;
     }
     
+    .age {
+       margin-left:10px;
+       margin-top:40px;
+    }
     .bin {
     height: 150px;
 }
