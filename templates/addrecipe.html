@@ -120,15 +120,17 @@
   <div id="share_recipe" class="modal">
     <div class="modal-content">
       <h4>Thank you for Sharing!</h4>
-       <p><img src="/static/image/submit.png"></p>
+       <p><img class="thanks" src="/static/image/submit.png"></p>
       <p>Changed your mind? Click outside this notification box to return to edit form</p>
     </div>
     <div class="modal-footer">
      <button><a class="modal-action modal-close waves-effect waves-green btn-flat">Return to recipes</a></button> 
     </div>
   </div>
-          
-
 </form>
-
+ <script type="text/javascript">
+    function goBack() {
+    window.history.back();
+    }
+    </script>
  {% endblock %}

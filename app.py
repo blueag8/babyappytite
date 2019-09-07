@@ -139,7 +139,7 @@ def update_recipe(recipe_id):
     )    
           
     print(request.form)
-    return redirect(url_for('home'))
+    return redirect(url_for('recipe',recipe_id=recipe_id))
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):

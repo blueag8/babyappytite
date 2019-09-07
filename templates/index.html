@@ -3,27 +3,28 @@
 
 <!------homepage--------->
 
- <div class="col s12">
-     
+
+  <div class="category_age">
+      <div class="col s6 offset-s2 col m3">
       {% for cat in categories %} 
- 
-       <a href="/get_recipes/{{cat.category_age}}"><img src="{{cat.image}}"></a>
-       
+     <img class="age">
+  <a href="/get_recipes/{{cat.category_age}}"><img class="age" src="{{cat.image}}"></a> 
+   </img>
           {% endfor %}
-       
+      </div>
   </div>
 
-   <div class="row">
+   <div class="logo">
       <div class="col s6 offset-s2">
-         <img class="apple img" src="/static/image/babyappytite.png">
+         <img class="apple" src="/static/image/logo.png">
       </div>
   </div>
    
    
  
-    <div class="row">
+    <div class="share">
       <div class="col s12 offset-m6">
-        <a href="/addrecipe"><img class="caterpillar img" src="https://res.cloudinary.com/blueag8/image/upload/v1567665021/Babyappytite/caterpillar_img_r43s7x.png" alt="Share a recipe"></a>
+        <a href="/addrecipe"><img class="share" src="/static/image/caterpillar_img.png" alt="Share a recipe"></a>
 	   </div>
     </div>
   </div>

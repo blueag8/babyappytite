@@ -52,32 +52,28 @@ footer {
 
 /*--------images---------------------*/
 
-img {
-    height: 170px;
-}
 
-img .edit {
+.edit {
     height: 80px;
 }
 
-.apple img {
-    height: 250px;
+ .share {
+    
+    float: right;
 }
-
-.caterpillar img {
-    height: 128px;
+  .apple {
+    height: 350px;
 }
+  .age {
+    height: 200px; 
+    float: left;
+  }
 
 .card {
     margin: 20px;
     padding: 20px;
     position: relative;
     background-color: #beefaf;
-    -webkit-transition: -webkit-box-shadow .25s;
-    transition: -webkit-box-shadow .25s;
-    transition: box-shadow .25s;
-    transition: box-shadow .25s, -webkit-box-shadow .25s;
-    border-radius: 2px;
 }
 
 card-body {
@@ -125,29 +121,43 @@ button {
 
 /*-----Media Queries--------*/
 
-@media (min-width: 375px) {
+@media (max-width: 375px) {
     .row {
         margin-bottom: 0px;
         margin-left: 0px;
     }
-    .container-fluid {
-        padding-right: 20px;
-        padding-top: 20px;
-    }
-    .age img {
-        height: 170px;
-    }
-    apple img {
-        height: 180px;
-    }
-    .caterpillar img {
-        height: 80px;
-    }
-    img.edit {
+   .card-img-top {
+    height: 220px;
+}
+   .logo {
+    margin-left: 50px;
+   }
+ 
+   .thanks {
+    height: 200px;
+}
+   .share {
+    margin-left: 100px;
+}
+  .apple {
+    height: 150px;
+}
+    .age {
+    height: 120px; 
+  }
+   .edit {
         height: 50px;
     }
+    
+    .bin {
+    height: 150px;
+}
     .modal .modal-content {
-        padding: 50px;
+        margin-left: 20px;
+    }
+    .modal .modal-footer {
+   
+    text-align: center;
     }
     col-offset-s6 {
         padding: 0px;
