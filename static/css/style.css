@@ -116,12 +116,24 @@ label {
     /* font-family: Emily; */
     font-size: 15px;
 }
+  .modal .modal-content {
+     margin-left: 20px;
+    }
+    .modal .modal-footer {
+     margin-bottom: 30px;
+    text-align: center;
+    }
 
 button {
     background-color: #4bf524;
     font-family: 'Emily';
 }
 
+  .thanks {
+    height: 150px;
+    float: right;
+    margin-bottom:20px;
+}
 .delete {
     color: #db1f1f;
 }
@@ -135,9 +147,7 @@ button {
     height:180px;
    }
   
-   .thanks {
-    height: 200px;
-}
+ 
    .caterpillar_img {
     position:relative;
     bottom:20px;
@@ -157,13 +167,7 @@ button {
     .bin {
     height: 150px;
 }
-    .modal .modal-content {
-        margin-left: 20px;
-    }
-    .modal .modal-footer {
-   
-    text-align: center;
-    }
+  
     col-offset-s6 {
         padding: 0px;
     }
