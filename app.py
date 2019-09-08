@@ -121,6 +121,7 @@ def update_recipe(recipe_id):
    
   
     {
+      '$set':{
             'recipe_name':request.form.get("recipe_name"),
             'category_age':request.form.get("category_age"),
             'cooking_time':int(request.form["cooking_time"]),
@@ -130,6 +131,7 @@ def update_recipe(recipe_id):
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
             #'image':request.files["image"]
+            }
       })
      
     

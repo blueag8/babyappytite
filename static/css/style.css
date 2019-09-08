@@ -71,7 +71,10 @@ footer {
     
 }
 
-
+ .age{
+     margin-top:40px;
+     margin-left: 20px;
+ }
 
 .card {
     margin: 20px;
@@ -162,6 +165,8 @@ button {
     
     .age { 
        float:right;
+       margin-top:30px;
+       margin-left: 0px;
     }
     
    
