@@ -1,4 +1,4 @@
-/*---------Navbar----------*/
+/*---------Navigation----------*/
 
 .navbar {
     min-height: 50px;
@@ -12,7 +12,14 @@
     height: 50px;
 }
 
-/* icon prefix focus color */
+a {
+    color: inherit;
+}
+
+.navbar img {
+    height: 80px;
+}
+
 
 .input-field .prefix.active {
     color: red;
@@ -99,13 +106,8 @@ p.recipe {
     float: right;
 }
 
-a {
-    color: inherit;
-}
 
-.navbar img {
-    height: 80px;
-}
+/*--------form---------*/
 
 .form-control {
     color: #0c0c0c;
@@ -169,8 +171,4 @@ button {
        margin-left: 0px;
     }
     
-   
-    col-offset-s6 {
-        padding: 0px;
-    }
 }

@@ -4,6 +4,8 @@ import os
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
+
+# secure_filename imported for image/file upload
 from werkzeug.utils import secure_filename
 
 
@@ -22,8 +24,6 @@ mongo = PyMongo(app)
 
 
 #home page
-
-
 @app.route('/')
 def home():
     return render_template("index.html", categories=mongo.db.categories.find())
@@ -40,7 +40,8 @@ def get_recipes(category_age):
 def recipe(recipe_id):
       return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 
-#original routes for category specific recipes
+#original routes for category specific recipes, as it was not conforming to the "DRY" 
+#principle these four routes were merged into the single route for 'get_recipes'. 
 
 #@app.route('/sixmonth_recipes')
 #def sixmonth_recipes():
@@ -114,7 +115,7 @@ def update_recipe(recipe_id):
      
     #if request.method == "POST":
       # if request.files:
-                     
+          #will use "Cloudinary" to implement upload image and storage requirements        
 
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
@@ -139,7 +140,7 @@ def update_recipe(recipe_id):
         {'_id': ObjectId(recipe_id)},
         { '$inc': { 'stars': 1}}
     )    
-          
+        #TESTING 
     print(request.form)
     return redirect(url_for('recipe',recipe_id=recipe_id))
     
@@ -161,7 +162,7 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe', recipe_id=recipe_id))
  
-
+#for testing change debug to "True"
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
