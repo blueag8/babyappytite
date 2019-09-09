@@ -40,8 +40,7 @@ def get_recipes(category_age):
 def recipe(recipe_id):
       return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 
-#original routes for category specific recipes, as it was not conforming to the "DRY" 
-#principle these four routes were merged into the single route for 'get_recipes'. 
+#original routes for category specific recipes, as it was not conforming to the "DRY" principle these four routes were merged into the single route for 'get_recipes'. 
 
 #@app.route('/sixmonth_recipes')
 #def sixmonth_recipes():

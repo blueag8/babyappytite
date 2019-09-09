@@ -29,7 +29,7 @@
               {% for cat in categories %}
                
       {% if cat.category_age == recipe.category_age %}
-         <option value="{{cat.category_age}}"selected>{{cat.category_age}}</option>
+        <option value="{{cat.category_age}}"selected>{{cat.category_age}}</option>
             {% else %}
             
         <option value="{{cat.category_age}}">{{cat.category_age}}</option>
@@ -116,14 +116,14 @@
         <div class="container2">
          <label for="steps">Steps</label>
           <button class="step">Add Steps &nbsp; 
-            <span>+ </span>
+          <span>+ </span>
           </button>
           <div class="row">
                 {% for step in recipe.steps %}
-            <div><input type="text" class="materialize-textarea"name="step"value="{{step}}">
-            <a href="#" class="delete">Delete</a></div>
+          <div><input type="text" class="materialize-textarea"name="step"value="{{step}}">
+           <a href="#" class="delete">Delete</a></div>
             {% endfor %}
-            </div>
+          </div>
           </div>
         </div>
      </div>
@@ -178,7 +178,7 @@
     function goBack() {
     window.history.back();
     }
-    </script>
+  </script>
  
 
  {% endblock %}
