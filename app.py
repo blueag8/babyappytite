@@ -4,8 +4,6 @@ import os
 from bson.objectid import ObjectId
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
-
-# secure_filename imported for image/file upload
 from werkzeug.utils import secure_filename
 
 
@@ -24,6 +22,8 @@ mongo = PyMongo(app)
 
 
 #home page
+
+
 @app.route('/')
 def home():
     return render_template("index.html", categories=mongo.db.categories.find())
@@ -40,7 +40,7 @@ def get_recipes(category_age):
 def recipe(recipe_id):
       return render_template("recipe.html", recipes=mongo.db.recipes.find({"_id": ObjectId(recipe_id)}))
 
-#original routes for category specific recipes, as it was not conforming to the "DRY" principle these four routes were merged into the single route for 'get_recipes'. 
+#original routes for category specific recipes
 
 #@app.route('/sixmonth_recipes')
 #def sixmonth_recipes():
@@ -70,13 +70,12 @@ def insert_recipe():
     
     recipes=mongo.db.recipes
 
-    print(request.form)
+
     recipe_name=request.form["recipe_name"]
     category_age=request.form.get("category_age")
     cooking_time=int(request.form["cooking_time"])
     portion_size=int(request.form["portion_size"])
-    allergens=request.form.getlist("allergen")
-    print("allergen",allergens)
+    allergens=request.form.getlist("allergen"),
     ingredients=request.form.getlist("ingredient")
     recipe_description=request.form["recipe_description"]
     steps=request.form.getlist("step")
@@ -95,10 +94,10 @@ def insert_recipe():
          }
           
     #image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))   
-   
-    recipe= recipes.insert_one(form)
-    print(recipe.inserted_id)
-    return redirect(url_for('recipe',recipe_id=recipe.inserted_id))
+
+    print("allergens")
+    recipes.insert_one(form)
+    return redirect(url_for('home'))
     
 #edit recipe/update recipe
 
@@ -114,14 +113,12 @@ def update_recipe(recipe_id):
      
     #if request.method == "POST":
       # if request.files:
-          #will use "Cloudinary" to implement upload image and storage requirements        
+                     
 
     recipes=mongo.db.recipes
     recipes.update( {'_id': ObjectId(recipe_id)},
-   
   
     {
-      '$set':{
             'recipe_name':request.form.get("recipe_name"),
             'category_age':request.form.get("category_age"),
             'cooking_time':int(request.form["cooking_time"]),
@@ -131,17 +128,16 @@ def update_recipe(recipe_id):
             'recipe_description':request.form.get("recipe_description"),
             'steps':request.form.getlist("step"),
             #'image':request.files["image"]
-            }
       })
      
-    
+        
     mongo.db.recipes.find_one_and_update(
         {'_id': ObjectId(recipe_id)},
         { '$inc': { 'stars': 1}}
     )    
-        #TESTING 
-    print(request.form)
-    return redirect(url_for('recipe',recipe_id=recipe_id))
+          
+    
+    return redirect(url_for('home'))
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
@@ -161,7 +157,7 @@ def stars(recipe_id):
     
     return redirect(url_for('recipe', recipe_id=recipe_id))
  
-#for testing change debug to "True"
+
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

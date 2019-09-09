@@ -25,6 +25,7 @@ a {
     color: red;
 }
 
+
 .btn {
     background-color: #55a626;
     margin: 20px;
@@ -132,6 +133,7 @@ label {
 button {
     background-color: #4bf524;
     font-family: 'Emily';
+    margin-bottom: 20px;
 }
 
   .thanks {
